@@ -1,0 +1,966 @@
+%    Copyright © 2015
+%  Eduardo Candido Xavier <eduardo@ic.unicamp.br>
+%
+%  This work is free. You can redistribute it and/or modify it under the
+%  terms of the Do What The Fuck You Want To Public License, Version 2,
+%  as published by Sam Hocevar. See the COPYING file for more details.
+%
+%  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+%                   Version 2, December 2004
+%
+%   Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+%
+%   Everyone is permitted to copy and distribute verbatim or modified
+%   copies of this license document, and changing it is allowed as long
+%   as the name is changed.
+%
+%  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+%   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+%
+%      0. You just DO WHAT THE FUCK YOU WANT TO.
+
+\documentclass[handout]{beamer}
+\usetheme{metropolis}
+\beamertemplatetransparentcoveredhigh
+
+\usepackage[portuges]{babel}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{xpatch}
+\usepackage[outputdir=build]{minted}
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\makeatother
+\setminted[c]{
+  linenos=true,
+  breaklines=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small,
+}
+\setminted[bash]{
+  linenos=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small
+}
+
+\newcommand{\cod}[1]{\mintinline{c}{#1}}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+\definecolor{Purple}{HTML}{911146}
+\definecolor{Orange}{HTML}{CF4A30}
+\setbeamercolor{alerted text}{fg=Orange}
+\setbeamercolor{frametitle}{bg=Purple}
+\setbeamercolor{block body}{bg=Purple!20,fg=black}
+\setbeamercolor{block title}{bg=Purple!50,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+
+\newcommand{\setcoverbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/coverbg}}
+}
+\newcommand{\setsectionbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/blank}}
+}
+
+\title{Programação Estruturada}
+\subtitle{Introdução à linguagem C}
+
+\author{Professores Emílio Francesquini e Carla Negri Lintzmayer}
+\institute{Centro de Matemática, Computação e Cognição\\ Universidade Federal do ABC}
+\date{2018.Q3}
+
+\begin{document}
+
+\setcoverbg
+\maketitle
+\setsectionbg
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Programação estruturada}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{O que é programação estruturada}
+
+    Técnica/paradigma de programação que visa o desenvolvimento de algoritmos por meio de estruturas de controle visando clareza e qualidade
+    \begin{itemize}
+        \item Estrutura sequencial
+        \item Estrutura condicional
+        \item Estrutura de repetição
+        \item Modularização
+    \end{itemize}
+
+    Exemplos de linguagens que suportam o paradigma estruturado: Pascal, Ada, Java, C, C++.
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A linguagem C}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Sobre a linguagem C}
+
+    \begin{itemize}[<+->]
+        \item Criada em 1972 por Dennis Ritchie
+        \begin{itemize}
+            \item The C Programming Language, Kernighan e Ritchie
+        \end{itemize}
+        \item Linguagem compilada, de propósito geral, estruturada, imperativa, procedural
+        \item Várias especificações (\textbf{ANSI}, C89, C99, C11)
+        \begin{itemize}
+            \item Neste curso nos concentraremos na especificação ANSI.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Programas em C}
+
+    \begin{itemize}[<+->]
+        \item Um programa em C é conjunto de um ou mais arquivos textos, contendo declarações e operações da linguagem (código fonte)
+        \item Consiste em uma ou mais \textit{funções}
+        \item A única obrigatória é denominada \textbf{main()}
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Programas em C}
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            printf("Hello world!\n");
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variáveis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis}
+
+    \begin{block}{Definição}
+        Variáveis são locais onde armazenamos valores.
+
+        Toda variável é caracterizada por um \textbf{nome}, que a identifica em um programa, e por um \textbf{tipo}, que determina o que pode ser armazenado naquela variável.
+    \end{block}
+
+    \pause
+    \begin{itemize}[<+->]
+        \item Durante a execução do programa, um pedacinho da memória corresponde às variáveis
+        \item Em C, existem 5 tipos básicos de variáveis: \texttt{char}, \texttt{int}, \texttt{float}, \texttt{double} e \texttt{void}\footnote{Estritamente falando, \texttt{void} não é um tipo, mas sim uma palavra reservada utilizada para marcar a ausência dos outros tipos}.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Declarando uma variável em C}
+
+    \begin{block}{Comando de declaração}
+        \texttt{\textbf{tipo\_variável nome\_variável;}}
+    \end{block}
+
+    \pause
+    Exemplos corretos:
+    \begin{itemize}
+        \item \texttt{int soma;}
+        \item \texttt{float preco\_abacaxi;}
+        \item \texttt{char resposta;}
+    \end{itemize}
+
+    \pause
+    Exemplos incorretos (por quê?):
+    \begin{itemize}
+        \item \texttt{soma int;}
+        \item \texttt{float preco\_abacaxi}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis inteiras}
+
+    \begin{block}{Variáveis inteiras}
+        Utilizadas para armazenar valores inteiros, como $13$ ou $1102$ ou $24$.
+    \end{block}
+
+    \pause
+    Abaixo temos os {\bf tipos da linguagem C} que servem para armazenar inteiros:
+    \begin{description}
+        \item[int] Inteiro cujo comprimento depende do processador.
+        É o mais utilizado.
+        Em processadores de 32 bits (4 bytes) pode armazenar valores entre -2.147.483.648 e 2.147.483.647.
+
+        \pause
+        \item[unsigned int] Inteiro cujo comprimento depende do processador e que armazena somente valores positivos.
+        Em processadores de 32 bits pode armazenar valores entre 0 e 4.294.967.295.
+    \end{description}
+
+    \pause
+    \alert{Pergunta:} Como fica o caso dos processadores de 64 bits?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis inteiras}
+
+    \begin{description}[<+->]
+        \item[long int] Inteiro que ocupa 64 bits (8 bytes) em computadores Intel de 64 bits, e pode armazenar valores entre aprox. $-9\times10^{18}$ e aprox. $9\times10^{18}$
+        \item[unsigned long int] Inteiro que ocupa 64 bits em computadores Intel de 64 bits, e armazena valores entre $0$ e aprox. $18 \times 10^{18}$
+        \item[short int] Inteiro que ocupa 16 bits (2 bytes) e pode armazenar valores entre -32.768 e 32.767
+        \item[unsigned short int] Inteiro que ocupa 16 bits e pode armazenar valores entre 0 e 65.535
+    \end{description}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis inteiras}
+
+    Exemplos de declaração de variáveis inteiras:
+    \begin{itemize}
+        \item \texttt{int numVoltas;}
+        \item \texttt{int ano;}
+        \item \texttt{unsigned int quantidadeChapeus;}
+    \end{itemize}
+
+    \pause
+    Exemplos inválidos:
+    \begin{itemize}
+        \item \texttt{int int numVoltas;}
+        \item \texttt{unsgned int ano;}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Declarando várias variáveis}
+    
+    Você pode declarar várias variáveis de um mesmo tipo em uma linha.
+
+    Basta separar as variáveis por vírgula:
+    \begin{itemize}
+        \item \texttt{int numVoltas, ano;}
+        \item \texttt{unsigned int val1, val2, val3, val4;}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis do tipo caractere}
+
+    \begin{block}{Variáveis caracteres}
+        Utilizadas para armazenar uma letra ou outro símbolo existente em textos.
+        Ex: \texttt{'a'}, \texttt{'3'}, \texttt{','}, \texttt{'+'}.
+    \end{block}
+
+    \pause
+    Exemplos de declaração:
+    \begin{itemize}
+        \item \texttt{char umaLetra;}
+        \item \texttt{char S\_ou\_N;}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis de tipo ponto flutuante}
+
+    \begin{block}{Variáveis de ponto flutuante}
+        Armazenam valores reais, mas possuem problemas de precisão pois há uma quantidade limitada de memória para armazenar um número real.
+        Ex: 2.1345 ou 9098.123.
+    \end{block}
+
+    \pause
+    Abaixo temos os {\bf tipos da linguagem C} que servem para armazenar números de ponto flutuante:
+    \begin{description}[<+->]
+        \item[float] Utiliza 32 bits, e na prática tem precisão de aproximadamente 6 casas decimais (depois do ponto). Pode armazenar valores entre $3.4 \times 10^{-38}$ e $3.4 \times 10^{38}$
+        \item[double] Utiliza 64 bits, e na prática tem precisão de aproximadamente 15 casas decimais. Pode armazenar valores entre $1.7 \times 10^{-308}$ e $1.7 \times 10^{308}$
+    \end{description}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis de tipo ponto flutuante}
+
+    Exemplos de declaração:
+    \begin{itemize}
+        \item \texttt{float salario, resultado;}
+        \item \texttt{double cotacaoDolar;}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Regras para nome de variável em C}
+
+    \begin{itemize}[<+->]
+        \item \textbf{Deve} começar com uma letra (maiúscula ou minúscula) ou subscrito (\_)
+        \item \textbf{Nunca} pode começar com um número
+        \item Pode conter letras maiúsculas, minúsculas, números e subscrito
+        \item Não pode conter os símbolos \texttt{\{} \texttt{(} \texttt{+} \texttt{-} \texttt{*} \texttt{/} \texttt{\textbackslash} \texttt{;} \texttt{.} \texttt{,} \texttt{?}
+        \item Letras maiúsculas e minúsculas são diferentes:
+        \begin{minted}{c}
+            int c, C;
+        \end{minted}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Regras para nome de variável em C}
+
+    As seguintes palavras já tem um significado na linguagem C (são reservadas) e por esse motivo não podem ser utilizadas como nome de variáveis:
+    
+    \begin{verbatim}
+    auto        double      int         struct
+    break       else        long        switch
+    case        enum        register    typedef
+    char        extern      return      union
+    const       float       short       unsigned
+    continue    for         signed      void
+    default     goto        sizeof      volatile
+    do          if          static      while
+    \end{verbatim}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Atribuição}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Atribuindo valores a variáveis}
+
+    \begin{block}{Comando de atribuição}
+        \texttt{\textbf{nome\_variável = valor;}}
+
+        ou
+
+        \texttt{\textbf{nome\_variável = expressão;}}
+    \end{block}
+
+    \pause
+    Exemplos:
+    \begin{minted}{c}
+        int a;
+        float c;
+        a = 5;
+        c = 67.89505456;
+        a = 3 + 5;
+    \end{minted}
+
+    \pause
+    Atribuir um valor de uma expressão para uma variável significa calcular o valor daquela expressão e então copiar aquele valor para a variável (nessa ordem).
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Atribuição}
+
+    \begin{itemize}
+        \item O sinal de igual (\texttt{=}) no comando de atribuição é chamado de {\bf operador de atribuição}
+        \pause
+        \item Veremos outros operadores mais adiante
+    \end{itemize}
+
+    \bigskip
+    
+    \pause
+    \begin{minipage}{0.4\textwidth}
+        À esquerda do operador de atribuição deve existir somente o nome de uma \textbf{variável}
+    \end{minipage}
+    \hfill = \hfill
+    \pause
+    \begin{minipage}{0.4\textwidth}
+        À direita, deve haver uma \textbf{expressão} cujo valor será calculado e armazenado na variável
+    \end{minipage}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Variáveis e constantes}
+
+    \begin{block}{Constantes}
+        São valores previamente determinados e que, por algum motivo, devem aparecer dentro de um programa
+    \end{block}
+
+    \pause
+    \begin{itemize}[<+->]
+        \item Constantes também possuem um tipo
+        \item Os tipos permitidos são exatamente os mesmos das variáveis, mais o tipo {\tt string}, que corresponde a uma sequência de caracteres
+        \item Exemplos de constantes:
+        \begin{minted}{c}
+            85, 0.10, 'c', "Hello, world!"
+        \end{minted}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões simples}
+
+    \begin{block}{}
+        Uma constante é uma expressão e, como tal, pode ser atribuída a uma variável (ou ser usada em qualquer outro lugar onde uma expressão seja válida)
+    \end{block}
+
+    \pause
+    Exemplos:
+    \begin{minted}{c}
+        int a;
+        a = 10;
+        char b;
+        b = 'F';
+        double c;
+        c = 3.141592;
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões simples}
+
+    \begin{block}{}
+        Uma variável também é uma expressão e pode ser atribuída a outra variável
+    \end{block}
+
+    \pause
+    Exemplo:
+    \begin{minted}{c}
+        int a, b;
+        a = 5;
+        b = a;
+    \end{minted}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões simples}
+
+    \begin{minted}{c}
+        int a, b, c;
+
+        a = 5 + 5 + 10;
+        b = 6;
+        c = a + b;
+        a = c + 4;
+    \end{minted}
+
+    Qual é o valor de \texttt{a}, \texttt{b} e \texttt{c}?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplos de atribuição}
+
+    A declaração de uma variável \textbf{sempre} deve ocorrer antes de seu uso
+
+    \begin{minted}{c}
+        int a, b;
+        float f;
+        char h;
+
+        a = 10;
+        b = -15;
+        f = 10.0;
+        h = 'A';
+
+        a = b;
+        f = a;
+        a = (b + a);
+    \end{minted}
+
+    Qual o valor final na variável \texttt{a}?
+
+\end{frame}
+
+%% TODO falar sobre *inicialização*
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplos errados de atribuição}
+
+    \begin{minted}{c}
+        int a, b;
+        float f, g;
+        char h;
+
+        a b = 10;
+        b = -15
+        d = 90;
+    \end{minted}
+
+    Quais são os erros?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Estrutura de um programa em C}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Estrutura básica de um programa em C}
+
+    \begin{minted}{c}
+        Declaracao de bibliotecas usadas
+
+        Declaracao de variaveis
+
+        int main() {
+            Declaracao de variaveis
+
+            Comandos
+
+            return 0;
+        }
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Estrutura básica de um programa em C}
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            int a;
+            int b, c;
+
+            a = 7 + 9;
+            b = a + 10;
+            c = b - a;
+
+            return 0;
+        }
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exercícios}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício 1}
+
+    Qual o valor armazenado na variável \texttt{a} no fim do programa?
+
+    \begin{minted}{c}
+        int main() {
+            int a, b, c, d;
+
+            d = 3;
+            c = 2;
+            b = 4;
+            d = c + b;
+            a = d + 1;
+            a = a + 1;
+
+            return 0;
+        }
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício 2}
+
+    Qual erro existe neste programa?
+
+    \begin{minted}{c}
+        int main () {
+            int a, b;
+            double c, d;
+            int g;
+
+            d = 3.0;
+            c = 2.4142;
+            b = 4;
+            a = 5 * b;
+            d = b + 90;
+            e = c * d;
+            a = a + 1;
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Expressões e operadores aritméticos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões}
+
+    \begin{itemize}[<+->]
+        \item Vimos que constantes e variáveis são expressões
+        \item Uma expressão também pode ser um conjunto de operações aritméticas, lógicas ou relacionais utilizadas para fazer ``cálculos'' sobre os valores das variáveis.
+    \end{itemize}
+
+    \pause
+    Exemplo de expressão:
+
+    \begin{minted}{c}
+        a + b
+    \end{minted}
+    Calcula a soma de {\bf a} e {\bf b}.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    \begin{itemize}[<+->]
+        \item Os operadores aritméticos são: \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}, \texttt{\%}
+        \item {\it expressão}  + {\it expressão} : Calcula a soma de duas expressões.
+
+        Ex: {\tt 10 + 15;}
+
+        \item {\it expressão}  - {\it expressão} : Calcula a subtração de duas expressões.
+
+        Ex: {\tt 5 - 7;}
+
+        \item {\it expressão}  * {\it expressão} : Calcula o produto de duas expressões.
+
+        Ex: {\tt 3 * 4;}
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    \begin{itemize}[<+->]
+        \item {\it expressão}  / {\it expressão} : Calcula a divisão de duas expressões.
+
+        Ex: {\tt 4 / 2;}
+
+        \item {\it expressão}  \% {\it expressão} : Calcula o resto da divisão (inteira) de duas expressões.
+
+        Ex: {\tt 5 \% 2;}
+
+        \item - {\it expressão} : Inverte o sinal da expressão.
+
+        Ex: {\tt -5;}
+    \end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    Mais sobre o operador resto da divisão \%:
+    \begin{itemize}[<+->]
+        \item Quando computamos ``$a$ dividido por $b$'', isto tem como resultado um valor $p$ e um resto $r < b$ que são únicos tais que $$a = p*b +r$$
+        \item Ou seja, $a$ pode ser dividido em $p$ partes inteiras de tamanho $b$, e sobrará um resto $r < b$.
+    \end{itemize}
+
+    \pause
+    Exemplos:
+
+    $5\%2$ tem como resultado o valor 1.\\
+    $15\%3$ tem como resultado o valor 0.\\
+    $1\%5$ tem como resultado o valor 1.\\
+    $19\%4$ tem como resultado o valor 3.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    No exemplo abaixo, quais valores serão impressos?
+
+    \begin{minted}{c}
+    #include <stdio.h>
+
+    int main() {
+        printf("%d\n", 29 % 3);
+        printf("%d\n", 4 % 15);
+
+        return 0;
+    }
+    \end{minted}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    Mais sobre o operador de divisão /:
+    \begin{itemize}[<+->]
+        \item Quando utilizado sobre valores inteiros, o resultado da operação de divisão será inteiro.
+        Isto significa que a parte fracionária da divisão será desconsiderada.
+        \begin{itemize}
+            \item $5/2$ tem como resultado o valor $2$.
+        \end{itemize}
+        \item Quando pelo menos um dos operandos for ponto flutuante, então a divisão será fracionária.
+        Ou seja, o resultado será a divisão exata dos valores.
+        \begin{itemize}
+            \item $5.0 / 2$ tem como resultado o valor $2.5$.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    No exemplo abaixo, quais valores serão impressos?
+
+    \begin{minted}{c}
+    #include <stdio.h>
+
+    int main() {
+        int a = 5, b = 2;
+        float c = 5.0, d = 2.0;
+
+        printf("%d\n",a/b);
+        printf("%f\n", a/d);
+        printf("%f\n", c/d);
+
+        return 0;
+    }
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões aritméticas}
+
+    \begin{itemize}[<+->]
+        \item As expressões aritméticas (e todas as expressões) operam sobre outras expressões.
+        \item É possível compor expressões complexas como por exemplo:
+
+        \texttt{a = b * ((2/c) + (9 + d*8));}
+
+        \item Qual o valor da expressão \texttt{5 + 10 \% 3}?
+        \item E da expressão \texttt{5 * 10 \% 3}?
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Precedência}
+    \begin{itemize}[<+->]
+        \item Precedência é a ordem na qual os operadores serão avaliados quando o programa for executado.
+        Em C, os operadores são avaliados na seguinte ordem:
+
+        \begin{itemize}
+            \item \texttt{*} e \texttt{/}, na ordem em que aparecerem na expressão.
+            \item \texttt{\%}
+            \item \texttt{+} e \texttt{-}, na ordem em que aparecerem na expressão.
+        \end{itemize}
+
+        \item Exemplo: \texttt{8 + 10*6} é igual a 68.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Alterando a precedência}
+    \begin{itemize}[<+->]
+        \item ({\it expressão}) também é uma expressão, que calcula o resultado da expressão dentro dos parênteses primeiro.
+        \begin{itemize}
+            \item 5 + 10 \% 3 é igual a 6
+            \item (5 + 10) \% 3 é igual a 0
+        \end{itemize}
+
+        \item Você pode usar quantos parênteses desejar dentro de uma expressão.
+        \item Use sempre parênteses em expressões para deixar claro em qual ordem a expressão é avaliada!
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Operadores $++$ e $--$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Incremento($++$) e decremento($--$)}
+
+    \begin{itemize}[<+->]
+        \item É muito comum escrevermos expressões para incrementar/decrementar o valor de uma variável por 1.
+        \begin{minted}{c}
+            a = a + 1;
+            a = a - 1;
+        \end{minted}
+
+        \item Em C, o operador unário $++$ é  usado para incrementar de 1 o valor de uma variável.
+        \begin{minted}{c}
+            a++;
+        \end{minted}
+
+        \item O operador unário $--$ é usado para decrementar de 1 o valor de uma variável.
+        \begin{minted}{c}
+            a--;
+        \end{minted}
+
+    \end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício}
+    Crie um programa que computa e imprime a soma, a diferença, a multiplicação e divisão dos dois números do tipo double.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Informações extras}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Informações extras: incremento($++$) e decremento($--$)}
+    Há uma diferença quando estes operadores são usados à esquerda ou à direita de uma variável \textbf{e} fazem parte de uma expressão maior:
+    \pause
+    \begin{itemize}[<+->]
+        \item {\tt ++a}: Neste caso o valor de {\tt a} será incrementado antes e só depois o valor de {\tt a} é usado na expressão.
+        \item {\tt a++}: Neste caso o valor de {\tt a} é usado na expressão, e só depois é incrementado.
+        \item A mesma coisa acontece com o operador $--$.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Informações extras: incremento($++$) e decremento($--$)}
+
+    O que o programa abaixo imprime?
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            int a = 5, b;
+
+            b = ++a;
+            printf("b: %d\n", b);
+            printf("a: %d\n", a);
+
+            b = a++;
+            printf("b: %d\n", b);
+            printf("a: %d\n", a);
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Informações extras: atribuições simplificadas}
+
+    Uma expressão da forma
+
+    \begin{minted}{c}
+        a = a + b;
+    \end{minted}
+
+    Pode ser simplificada como
+
+    \begin{minted}{c}
+        a += b;
+    \end{minted}
+
+    A variável à qual o valor é atribuído faz parte da expressão.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Informações extras: atribuições simplificadas}
+
+    \begin{center}
+    \begin{tabular}{lll}
+        \hline
+        \textbf{Comando} & \textbf{Exemplo} & \textbf{Corresponde a:} \\
+        \hline
+        += & a += b; & a = a + b;  \\
+        -= & a -= b; & a = a - b; \\
+        *= & a *= b; & a = a * b; \\
+        /= & a /= b; & a = a / b; \\
+        \%= & a \%= b; & a = a \% b; \\
+        \hline
+    \end{tabular}
+    \end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

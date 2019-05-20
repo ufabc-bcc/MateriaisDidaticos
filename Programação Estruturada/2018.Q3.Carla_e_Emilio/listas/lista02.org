@@ -1,0 +1,104 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: pt_br
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA028-15 - Programação Estruturada {{{CrLf}}} 2018.Q3
+#+SUBTITLE: *Lista de Exercícios 2*
+#+AUTHOR:   Professores Emílio Francesquini e Carla Negri Lintzmayer
+
+1. Faça um programa que imprima um menu de 4 pratos na tela e uma
+   quinta opção para sair do programa. O programa deve imprimir o
+   prato solicitado. O programa deve terminar quando for escolhida a
+   quinta opção.
+
+2. Faça um programa que lê dois números inteiros positivos ~a~ e
+   ~b~. Utilizando laços, o seu programa deve calcular e imprimir o
+   valor $a^b$.
+
+3. Faça um programa que lê um número n e que compute e imprima o valor
+     \begin{equation*}
+       \sum_{i=1}^{n}i
+     \end{equation*}
+     Obs: Não use fórmulas como a da soma de uma P.A.
+
+4. Faça um programa que lê um número ~n~ e imprima os valores entre ~2~ e
+   ~n~ que são divisores de ~n~.
+
+5. Faça um programa que lê um número ~n~ e imprima os valores
+   \begin{equation*}
+     v_j = \sum_{i=1}^{j} i
+   \end{equation*}
+   para ~j~ variando de 1 até ~n~, um valor $v_j$ por linha.
+
+   # 6. No exemplo dos números primos visto em aula, não precisamos testar todos os números entre 2, . . . ,(n−
+   # 1), para verificar se dividem ou não n. Basta testarmos até n/2. Por que? Qual o maior divisor possí-
+   # vel de n? Na verdade basta testarmos os números 2, . . . , √
+   # n. Por que?
+
+6. Considere o programa para determinar se uma sequência de ~n~ números
+   digitados pelo usuário está ordenada ou não. Faça o programa usando
+   uma variável contadora.
+
+7. Faça um programa em C que calcule o máximo divisor comum de dois
+   números ~m~ e ~n~. Você deve utilizar a seguinte regra do cálculo do mdc
+   com $m \geq n$:
+   \begin{equation*}
+       \begin{split}
+           \text{mdc}(m, n) &= m \text{ se } n = 0 \\
+           \text{mdc}(m, n) &= \text{mdc}(n, m\%n) \text{ se } n > 0
+       \end{split}
+   \end{equation*}
+
+8. Escreva um programa que lê um número ~n~ e então imprime o menor
+   número primo que é maior ou igual ~n~ e imprime o maior primo que
+   é menor ou igual a ~n~.
+
+9. O que será impresso pelo programa abaixo? Assuma que o valor de D
+   na declaração de ~x~ é o valor do último dígito do seu RA.
+   #+BEGIN_SRC C
+   int main() {
+       int x = 5 + D, y = 0;
+       do {
+           y = (x % 2) + 10 * y;
+           x = x / 2;
+           printf("x = %d, y = %d\n", x, y);
+       } while (x != 0);
+
+       while (y != 0) {
+           x = y % 100;
+           y = y / 10;
+           printf("x = %d, y = %d\n", x, y);
+       }
+   }
+   #+END_SRC
+
+10. Escreva um programa para ler ~n~ de números do tipo float e imprimir
+    quantos deles estão nos seguintes intervalos: [0 ... 25], [26 ... 50],
+    [51 ... 75] e [76 ... 100]. Por exemplo, para $n = 10$ e os
+    seguintes dez números 2.0, 61.5, -1.0, 0.0, 88.7, 94.5, 55.0,
+    3.1415, 25.5, 75.0, seu programa deve imprimir:
+    #+BEGIN_SRC text
+    Intervalo [0..25]: 3
+    Intervalo [26..50]: 0
+    Intervalo [51..75]: 3
+    Intervalo [76..100]: 2
+    #+END_SRC
+
+11. Elabore um programa em C para computar a raiz quadrada de um
+    número positivo. Use a ideia abaixo, baseada no método de
+    aproximações sucessivas de Newton. O programa deverá imprimir o
+    valor da vigésima aproximação.
+
+    Seja $Y$ um número, sua raiz quadrada é raiz da equação
+    \begin{equation*}
+        f(x) = x^2 - Y
+    \end{equation*}
+    A primeira aproximação é $x_1 = Y / 2$. A $(n + 1)\text{-ésima}$ aproximação é
+    \begin{equation*}
+        x_{n+1} = x_n + \frac{f(x_n)}{f'(x_n)}
+    \end{equation*}

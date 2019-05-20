@@ -1,0 +1,148 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: pt_br
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA028-15 - Programação Estruturada {{{CrLf}}} 2018.Q3
+#+SUBTITLE: *Lista de Exercícios 4*
+#+AUTHOR:   Professores Emílio Francesquini e Carla Negri Lintzmayer
+
+
+1. Crie uma função que recebe um vetor e seu tamanho por parâmetro além de dois números inteiros $i$ e $j$ que são índices do vetor (ou seja $0 \le i, j \le n$).
+   A função deve então trocar os elementos das posições $i$ e $j$ entre si.
+
+2. Faça um programa que lê um vetor de 30 inteiros e guarda o vetor na ordem inversa que foi lido em um outro vetor de saída.
+
+3. Faça uma função que recebe um vetor de inteiros e seu tamanho como parâmetros, e ao final da execução da função o vetor esteja invertido.
+   Utilize a seguinte ideia: troque os elementos da posição $0$ e $29$ entre si, depois da posição $1$ e $28$ etc. Pense bem no critério de parada.
+
+4. Escreva uma função que recebe um vetor de inteiros e seu tamanho como parâmetros e devolve a soma dos números pares deste vetor.
+
+5. Faça uma função que recebe um vetor de números reais e o seu tamanho e devolve o desvio padrão dos números do vetor usando a seguinte fórmula:
+
+   \begin{equation*}
+    \sqrt {\frac {\sum _{i=1}^{N}(x_{i}-{\overline {x}})^{2}}{N-1}}
+   \end{equation*}
+
+   Onde $\{x_{1},\,x_{2},\,\ldots ,\,x_{N}\}$ são os valores recebidos, $\overline {x}$ é a média destes valores e $N$ é o número de valores observados.
+
+6. Escreva uma função que recebe dois vetores que representam conjuntos e testa se o primeiro está contido no segundo.
+   Sua função deve retornar 1 se o primeiro conjunto está contido no segundo e 0, caso contrário.
+
+7. Escreva uma função que recebe dois vetores que representam conjuntos e calcula, em um terceiro vetor, a interseção dos dois primeiros.
+   Sua função deve retornar a quantidade de elementos da interseção dos dois conjuntos recebidos.
+
+8. Escreva uma função que recebe dois vetores que representam conjuntos e calcula, em um terceiro vetor, a união dos dois primeiros.
+   Sua função deve retornar a quantidade de elementos da união dos dois conjuntos recebidos.
+
+9. Ao voltar de um intenso jogo de RPG na casa de um amigo, o jovem Will desapareceu misteriosamente!
+   Todos estão desesperadamente procurando por ele por todos os cantos.
+   Enquanto isso, coisas estranhas estão acontecendo em sua casa.
+   Uma delas, entretanto, lhe permite comunicar-se com o garoto!
+
+   Há exatamente 26 lâmpadas penduradas na parede da sua sala, numeradas de 1 a 26 da esquerda para a direita.
+   Além disso, há uma letra do alfabeto pintada na parede em baixo de cada lâmpada.
+   Quando Will quer lhe enviar uma mensagem, ele irá (misteriosamente) piscar, uma a uma, as lâmpadas correspondentes a cada letra de sua mensagem.
+   Por exemplo, se ele quer enviar a mensagem HELP, ele irá piscar, nesta ordem, as lâmpadas acima das letras H, E, L e P.
+
+   Dada a letra associada a cada lâmpada e a ordem das lâmpadas que foram piscadas por Will, decifre a mensagem que ele enviou.
+
+   O programa deverá receber inicialmente exatamente 26 letras maiúsculas contendo todas as letras do alfabeto (não necessariamente em ordem).
+   Considere que as letras são dadas em uma única linha e que não há espaço entre elas.
+   A primeira letra da sequência está associada à lâmpada 1; a segunda letra está associada à lâmpada 2; e assim por diante.
+   A segunda linha da entrada consiste de um inteiro $N$ ($1 \leq N \leq 104$), que indica o número de lâmpadas que foram piscadas.
+   Em seguida o programa deve receber $N$ inteiros $\ell_i$ ($1 \leq \ell_i \leq 26$), indicando as lâmpadas que foram piscadas, em ordem.
+   A saída deve consistir de uma única linha, contendo a mensagem de Will, sem espaços entre as letras.
+
+10. Escreva um programa que leia duas sequências de inteiros e determina se a segunda é uma permutação da primeira.
+    Uma sequência é uma permutação de outra se todos os números de uma ocorrem na outra, uma mesma quantidade de vezes, independente da posição.
+    Exemplos: $(1~3~5~2~4)$, $(3~1~2~4~5)$, $(2~4~5~1~3)$ são permutações entre si bem como $(1~2~1)$, $(2~1~1)$, $(1~1~2)$ são permutações entre si.
+
+11. Faça um programa que leia uma matriz no máximo $30 \times 30$ e imprima a sua transposta.
+
+12. Faça um programa que leia uma matriz de ordem $\ell \times c$ ($1 \leq \ell, c \leq 1000$).
+    Faça funções para cada uma das seguintes funcionalidades:
+    - Dados a matriz e um inteiro $i$, calcule a média dos números armazenados na $i\text{-ésima}$ linha.
+    - Dados a matriz e um inteiro $i$, calcule a média dos números armazenados na $i\text{-ésima}$ coluna.
+    - Dada a matriz, calcule a soma dos elementos que estão na diagonal principal se a matriz for quadrada.
+    - Dada a matriz, calcule a soma dos elementos que estão na diagonal secundária se a matriz for quadrada.
+    - Dada a matriz, teste se ela é simétrica.
+    - Dados a matriz e dois inteiros $i$ e $j$, troque o conteúdo das linhas $i$ e $j$ entre si.
+    - Dados a matriz e dois inteiros $i$ e $j$, calcule a soma de todos os elementos da linha $i$ e dos elementos da linha $j$. (O elemento $e_{ij}$ deverá ser contado uma única vez).
+    - Dada a matriz, verifica se existe um elemento dominante nela: um elemento é dominante se seus elementos vizinhos (até 8 elementos) são menores do que ele.
+
+13. O tabuleiro do jogo de campo minado consiste em uma matriz de $N$ linhas e $M$ colunas.
+    Cada célula da matriz contém uma mina ou o número de minas que existem nas células adjacentes a ela.
+    Uma célula é adjacente a outra se estiver imediatamente à esquerda, à direita, acima ou abaixo da célula.
+    Note que, se não contiver uma mina, uma célula deve obrigatoriamente conter um número entre 0 e 4, inclusive.
+
+    Faça um programa que recebe inicialmente os inteiros $N$ e $M$ ($1 \leq N, M \leq 100$).
+    As próximas $N$ linhas contêm $M$ inteiros cada, descrevendo as minas de um campo minado.
+    O \(j\)-ésimo inteiro da \(i\)-ésima linha é 1 se existe uma mina na linha $i$ e coluna $j$ do tabuleiro, ou 0 caso contrário.
+
+    Seu programa deve imprimir $N$ linhas com $M$ caracteres cada, não separados por espaços, descrevendo a configuração do tabuleiro do jogo.
+    Se uma posição contém uma mina, imprima "*" para ela; caso contrário, imprima o número de minas que existem ao redor de tal posição (algum número entre 0 e 4).
+
+14. Uma matriz quadrada de inteiros é um quadrado mágico se a soma dos elementos de cada linha, a soma dos elementos de cada coluna, a soma dos elementos da diagonal principal e da diagonal secundária são todos iguais.
+    A matriz abaixo é um exemplo de quadrado mágico:
+
+    \begin{equation*}
+        \begin{pmatrix}
+             3  & 4 & 8 \\
+             10 & 5 & 0 \\
+             2  & 6 & 7
+        \end{pmatrix}
+    \end{equation*}
+
+    Faça um programa que lê uma matriz quadrada e determina se ela é um quadrado mágico.
+
+15. Escreva um programa que leia duas palavras do teclado e determina se a segunda é um anagrama da primeira.
+    Uma palavra é um anagrama de outra se todas as letras de uma ocorrem na outra, em mesmo número, independente da posição.
+    Exemplos: ROMA, MORA, ORAM, AMOR, RAMO são anagramas entre si.
+
+16. Faça um programa que leia um texto ~T~ e uma palavra ~p~ do teclado.
+    Em seguida o programa deverá imprimir todas as posições onde ocorrem a palavra p em T.
+    Se por exemplo ~T = "duas bananas e 4 abacates. Nao havera mais bananas."~, e ~p ="bananas"~, então o programa deveria imprimir $5$ e $43$.
+
+17. Escreva um programa que lê uma string de até $50$ caracteres, e imprime ~Palindromo~ caso a string seja um palíndromo e ~Nao Palindromo~ caso contrário.
+    Obs.: Um palíndromo é uma palavra ou frase, que é igual quando lida da esquerda para a direita ou da direita para a esquerda (assuma que só são usados caracteres minúsculos e sem acentos.
+    Espaços em brancos devem ser descartados).
+    Exemplo de palíndromo: "saudavel leva duas".
+
+18. Historicamente César foi o primeiro a codificar mensagens. Ele reorganizava o texto de suas mensagens de maneira que o texto parecia não ter sentido.
+    Cada mensagem sempre possuía uma contagem de letras cujo total equivalia a um quadrado perfeito, dependendo de quanto César tivesse que escrever.
+    Assim, uma mensagem com $16$ caracteres usava um quadrado de quatro por quatro; se fossem $25$ caracteres, seria cinco por cinco; $100$ caracteres requeriam um quadrado de dez por dez, etc.
+    Seus oficiais sabiam que deviam transcrever o texto preenchendo as casas do quadrado sempre que uma mensagem cifrada chegasse. Ao fazerem isso, podiam ler a mensagem na vertical e seu sentido se tornaria claro.
+    Escreva um programa que lê o tamanho de uma string e a string propriamente dita. Em seguida o seu programa deverá escrever a mensagem decifrada.
+    Exemplo:
+    #+BEGIN_EXAMPLE
+    36
+    UEEUMOFSHMSCAT*AGUBA***LC****T*****A
+    #+END_EXAMPLE
+    Esta mensagem pode ser transcrita em um quadrado perfeito $6 \times 6$.
+    #+BEGIN_EXAMPLE
+    U E E U M O
+    F S H M S C
+    A T * A G U
+    B A * * * L
+    C * * * * T
+    * * * * * A
+    #+END_EXAMPLE
+    Lendo cada coluna da matriz (desconsiderando o caractere ~*~), a saída deverá conter: ~UFABC ESTA EH UMA MSG OCULTA~.
+
+19. Sudoku é jogado numa matriz de $9 \times 9$ quadrados, dividida em sub-matrizes de $3 \times 3$  quadrados, chamados de "quadrantes".
+    O objetivo do jogo é preencher os quadrados com números entre 1 e 9 de acordo com as seguintes regras:
+    - Cada número pode aparecer apenas uma vez em cada linha.
+    - Cada número pode aparacer apenas uma vez em cada coluna.
+    - Cada número pode aparecer apenas uma vez em cada quadrante.
+    Exemplo:
+
+    #+ATTR_LATEX: :width 6cm
+    [[./sudoku.png]]
+
+    Escreva um programa que lê um jogo de Sodoku (matriz $9 \times 9$, toda preenchida com números de $1$ a $9$) e verifica se é um jogo válido.
+    Um jogo válido é aquele que respeita as três regras acima.

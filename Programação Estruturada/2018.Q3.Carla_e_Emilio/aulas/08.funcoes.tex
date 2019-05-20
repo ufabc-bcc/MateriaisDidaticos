@@ -1,0 +1,1076 @@
+% Copyright © 2015
+% Eduardo Candido Xavier <eduardo@ic.unicamp.br>
+%
+% This work is free. You can redistribute it and/or modify it under the
+% terms of the Do What The Fuck You Want To Public License, Version 2,
+% as published by Sam Hocevar. See the COPYING file for more details.
+%
+% DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+% Version 2, December 2004
+%
+% Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+%
+% Everyone is permitted to copy and distribute verbatim or modified
+% copies of this license document, and changing it is allowed as long
+% as the name is changed.
+%
+% DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+% TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+%
+% 0. You just DO WHAT THE FUCK YOU WANT TO.
+
+\documentclass[handout]{beamer}
+\usetheme{metropolis}
+\beamertemplatetransparentcoveredhigh
+
+\usepackage[portuges]{babel}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{xpatch}
+\usepackage[outputdir=build]{minted}
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\makeatother
+\setminted[c]{
+  linenos=true,
+  breaklines=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small,
+}
+\setminted[bash]{
+  linenos=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small
+}
+
+\newcommand{\cod}[1]{\mintinline{c}{#1}}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+\definecolor{Purple}{HTML}{911146}
+\definecolor{Orange}{HTML}{CF4A30}
+\setbeamercolor{alerted text}{fg=Orange}
+\setbeamercolor{frametitle}{bg=Purple}
+\setbeamercolor{block body}{bg=Purple!20,fg=black}
+\setbeamercolor{block title}{bg=Purple!50,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+
+\newcommand{\setcoverbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/coverbg}}
+}
+\newcommand{\setsectionbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/blank}}
+}
+
+\title{Programação Estruturada}
+\subtitle{Funções}
+
+\author{Professores Emílio Francesquini e Carla Negri Lintzmayer}
+\institute{Centro de Matemática, Computação e Cognição\\ Universidade Federal do ABC}
+\date{2018.Q3}
+
+\begin{document}
+
+\setcoverbg
+\maketitle
+\setsectionbg
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Funções}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Funções} 
+    
+    \begin{itemize}[<+->]
+        \item Um ponto chave na resolução de um problema complexo é conseguir ``quebrá-lo'' em subproblemas menores.
+        \item Ao criarmos um programa para resolver um problema, é crítico quebrar um código grande em partes menores, fáceis de serem entendidas e administradas. 
+        \item Isto é conhecido como modularizacão, e é empregado em qualquer projeto de engenharia envolvendo a construção de um sistema complexo.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Funções} 
+
+    \begin{block}{Funções}
+        São estruturas que agrupam um conjunto de comandos, que são executados quando a função é chamada/invocada.
+    \end{block}
+
+    \begin{itemize}
+        \item Vocês já usaram algumas funções como {\bf scanf} e {\bf printf}.
+        \item Algumas funções podem devolver algum valor ao final de sua execução:
+
+        \begin{minted}{c}
+            x = sqrt(4);
+        \end{minted}
+
+        \item Vamos aprender como criar e usar funções em C.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Por que utilizar funções?}
+
+    \begin{itemize}[<+->]
+        \item Evitar que os blocos do programa fiquem grandes demais e, por consequência, mais difíceis de ler e entender.
+        \item Separar o programa em partes que possam ser logicamente compreendidas de forma isolada.
+        \item Permitir o reaproveitamento de código já construído (por você ou por outros programadores).
+        \item Evitar que um trecho de código seja repetido várias vezes dentro de um mesmo programa, minimizando erros e facilitando alterações. 
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Definindo uma função}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Definindo uma função}
+
+    Uma função é definida da seguinte forma:
+    
+    \begin{minted}{c}
+        tipo_retorno nome(tipo parâmetro1,..., tipo parâmetroN) {
+            comandos;
+            return valor_de_retorno;
+        }
+    \end{minted}
+
+    \begin{itemize}
+        \item Toda função deve ter um tipo ({\bf int, char, float, void, etc}). Esse tipo determina qual será o tipo de seu valor de retorno.
+        \item Os {\bf parâmetros} são variáveis, que são inicializadas com valores indicados durante a invocação da função.
+        \item O comando {\bf return} devolve para o invocador da função o resultado da execução desta.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Definindo uma função: exemplo}
+
+    A função abaixo recebe como parâmetro dois valores inteiros. 
+    Ela faz a soma destes valores e devolve o resultado.
+
+    \begin{minted}{c}
+        int soma(int a, int b) {
+            int c;
+            c = a + b;
+            return c;
+        }
+    \end{minted}
+
+    \begin{itemize}
+        \item Note que o valor de retorno (variável {\bf c}) é do mesmo tipo da função.
+        \item Quando o comando {\bf return} é executado, a função para de executar e retorna o valor indicado para quem fez a invocação (ou chamada) da função.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Definindo uma função: exemplo}
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        int soma(int a, int b) {
+            int c;
+            c = a + b;
+            return c;
+        }
+    \end{minted}
+
+    \small
+    Qualquer função pode invocar esta função \cod{soma}, passando como parâmetro dois valores inteiros, que serão atribuídos para as variáveis {\bf a} e {\bf b}, respectivamente.
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        int main() {
+            int r;
+            r = soma(12, 90);
+            printf("r = %d\n", r);
+            r = soma (-9, 45);
+            printf("r = %d\n", r);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Definindo uma função: exemplo}
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+
+        int soma(int a, int b) {
+            int c;
+            c = a + b;
+            return c;
+        }
+
+        int main() {
+            int res, x1 = 4, x2 = -10;
+            res = soma(5, 6);
+            printf("Primeira soma: %d\n", res);
+            res = soma(x1, x2);
+            printf("Segunda soma: %d\n",res);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Execução de um programa com funções}
+    \begin{itemize}[<+->]
+        \item Qualquer programa começa executando os comandos da função {\bf main}.
+        \item Quando se encontra a chamada para uma função, o fluxo de execução passa para ela e são executados os comandos até que um {\bf return} seja encontrado ou o fim da função seja alcançado.
+        \item Depois disso, o fluxo de execução volta para o ponto onde a chamada da função ocorreu.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Definindo uma função: exemplo}
+
+    A lista de parâmetros de uma função pode ser vazia.
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        int leInteiro() {
+            int c;
+            printf("Digite um número: ");
+            scanf("%d", &c);
+            return c;
+        }
+    \end{minted}
+
+    O retorno será usado pelo invocador da função:
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        int main() {
+            int r;
+            r = leInteiro();
+            printf("Numero digitado: %d\n", r);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Definindo uma função: exemplo}
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int leInteiro() {
+            int c;
+            printf("Digite um numero: ");
+            scanf("%d", &c);
+            return c;
+        }
+
+        int main() {
+            int r;
+            r = leInteiro();
+            printf("Numero digitado: %d\n", r);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo de função}
+
+    \small
+    A expressão contida dentro do comando {\bf return} é chamada de \textit{valor de retorno} (é a resposta da função).
+    Nada após esse comando será executado.
+
+    \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+
+        int leInteiro() {
+            int c;
+            printf("Digite um numero: ");
+            scanf("%d", &c);
+            return c;
+            printf("Bla bla bla!\n");
+        }
+
+        int soma (int a, int b) {
+            return a + b;
+        }
+        
+        int main() {
+            int x1, x2, res;
+            x1 = leInteiro();
+            x2 = leInteiro();
+            res = soma(x1, x2);
+            printf("Soma eh: %d\n", res);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Invocando uma função}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Invocando uma função}
+
+    \begin{itemize}
+        \item Uma forma clássica de realizarmos a invocação (ou chamada) de uma função é atribuindo o seu valor a uma variável:
+        \begin{minted}{c}
+            x = soma(4, 2);
+        \end{minted}
+
+        \pause
+
+        \item Na verdade, o resultado da chamada de uma função é uma expressão e pode ser usado em qualquer lugar que aceite uma expressão:
+        \begin{minted}{c}
+            printf("Soma de a e b: %d\n", soma(a, b));
+        \end{minted}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Invocando uma função}
+
+    Na chamada da função, para cada um dos parâmetros desta devemos fornecer um valor de mesmo tipo e na mesma ordem da declaração.
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int somaComMensagem(int a, int b, char texto[100]) {
+            int c = a + b;
+            printf("%s %d\n", texto, c);
+            return c;
+        }
+
+        int main() {
+            somaComMensagem(4, 5, "Resultado da soma:");
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Invocando uma função}
+
+    A saída do programa anterior será:
+
+    \begin{minted}{bash}
+        Resultado da soma: 9
+    \end{minted}
+
+    \pause
+
+    Já a chamada abaixo gerará um erro de compilação:
+    \begin{minted}{c}
+        int main() {
+            somaComMensagem(4, "Resultado da soma:",  5);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Invocando uma função}
+
+    \small
+    \begin{itemize}
+        \item Ao chamar uma função passando variáveis {\bf simples} como parâmetros, estamos usando apenas os seus valores, que serão copiados para as variáveis parâmetros da função.
+        \item Os valores das variáveis na chamada da função não são afetados por alterações dentro da função.
+
+        \begin{minted}[fontsize=\tiny]{c}
+            #include <stdio.h>
+
+            int incr(int x) {
+                x = x + 1;
+                return x;
+            }
+
+            int main() {
+                int a = 2, b;
+                b = incr(a);
+                printf("a = %d, b = %d\n", a, b);
+                return 0;
+            }
+        \end{minted}
+
+        \item O que será impresso? O valor de {\bf a} é alterado pela função {\bf incr}?
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{O tipo void}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{O tipo {\bf void}}
+
+    \begin{itemize}
+        \item O ``tipo'' {\bf void} é um tipo especial.
+        \item Ele representa  ``nada'', ou seja, uma variável desse tipo armazena conteúdo indeterminado, e uma função desse tipo retorna um conteúdo indeterminado.
+        \item Em geral, este tipo é utilizado para indicar que uma função não retorna nenhum valor.
+    \end{itemize}  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{O tipo {\bf void}}
+
+    \begin{itemize}
+        \item Por exemplo, a função abaixo imprime o número que for passado para ela como parâmetro e não devolve nada.
+        \item Neste caso não utilizamos o comando {\bf return}.
+        
+        \begin{minted}{c}
+            void imprimeInteiro(int numero) {
+                printf("Número %d\n", numero);
+            }
+        \end{minted}
+
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{O tipo {\bf void}}
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        void imprimeInteiro(int numero) {
+            printf("Número %d\n", numero);
+        }
+
+        int main() {
+            imprimeInteiro(10);
+            imprimeInteiro(20);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section {A função {\bf main}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{A função {\bf main}}
+
+    \begin{itemize}
+        \item O programa principal é uma função especial, que possui um tipo fixo ({\bf int}) e é invocada automaticamente pelo sistema operacional quando este inicia a execução do programa.
+        \item Quando utilizado, o comando {\bf return} informa ao sistema operacional se o programa funcionou corretamente ou não. O padrão é que um programa retorne zero caso tenha funcionado corretamente ou qualquer outro valor caso contrário.
+        
+        \begin{minted}{c}
+            #include <stdio.h>
+
+            int main() {
+                printf("Ola turma!\n");
+                return 0;
+            }
+        \end{minted}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Protótipo de funções}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Protótipo de funções: definindo funções depois da {\bf main}}
+
+    Até o momento, aprendemos que devemos definir as funções antes do programa principal.
+    O que ocorreria se declarássemos depois?
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            float a = 0, b = 5;
+            printf("%f\n", soma(a, b));
+            return 0;
+        }
+
+        float soma(float op1, float op2) {
+            return op1 + op2;
+        }
+    \end{minted}
+
+    \pause
+    Dependendo do compilador, ocorre um erro de compilação!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Protótipo de funções: declarando uma função sem defini-la}
+
+    \begin{itemize}[<+->]
+        \item Para organizar melhor um programa e podermos implementar funções em partes distintas do arquivo fonte, utilizamos {\bf protótipos de funções}.
+        \item Protótipos de funções correspondem a primeira linha da definição de uma função, contendo: tipo de retorno, nome da função, parâmetros e por fim {\bf um ponto e vírgula}.
+
+        \begin{minted}{c}
+            tipo_retorno nome(tipo parâmetro1, ..., tipo parâmetroN);
+        \end{minted}
+
+        \item O protótipo de uma função deve aparecer antes do seu uso. 
+        \item Em geral coloca-se os protótipos de funções no início do seu arquivo do programa.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Protótipo de funções: declarando uma função sem defini-la}
+
+    Em geral o programa é organizado da seguinte forma:
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+        #include <outras bibliotecas>
+        
+        /* Protótipos de funções */
+        int fun1(lista de parâmetros);
+
+        int main() {
+            comandos;
+        }
+
+        /* Declarações de funções */
+        int fun1(lista de parâmetros) {
+            comandos;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Protótipo de Funções: Exemplo 1}
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+
+        float soma(float op1, float op2);
+        float subtrai(float op1, float op2);
+
+        int main() {
+            float a = 0, b = 5;
+            printf("soma = %f\nsubtracao = %f\n", soma (a, b), subtrai(a, b));
+            return 0;
+        }
+
+        float soma(float op1, float op2) {
+            return op1 + op2;
+        }
+
+        float subtrai(float op1, float op2) {
+            return op1 - op2;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Funções Podem Invocar Funções}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Funções Podem Invocar Funções}
+
+    \begin{itemize}
+        \item Nos exemplos anteriores apenas a função {\bf main} invocava funções por nós definidas.
+        \item Isto não é uma regra. Qualquer função pode invocar outra função (exceto a {\bf main}, que é invocada apenas pelo sistema operacional).
+        \item Veja o exemplo no próximo slide.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Funções Podem Invocar Funções}
+
+    O que será impresso?
+
+            \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+
+        int fun1(int a);
+        int fun2(int b);
+
+        int main() {
+            int c = 5;
+            c = fun1(c);
+            printf("c = %d\n", c);
+            return 0;
+        }
+
+        int fun1(int a) {
+            a = a + 1;
+            a = fun2(a);
+            return a;
+        }
+
+        int fun2(int b) {
+            b = 2 * b;
+            return b;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Escopo de Variáveis: variáveis locais e globais}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Variáveis locais e variáveis globais}
+
+    \begin{itemize}[<+->]
+        \item Uma variável é chamada \alert{local} se ela foi declarada dentro de uma função.
+        Nesse caso ela existe somente dentro da função e, após o término da execução desta, a variável deixa de existir.
+        {\bf Variáveis parâmetros também são variáveis locais.}
+        \item Uma variável é chamada \alert{global} se ela for declarada fora de qualquer função.
+        Essa variável é visível em todas as funções.
+        Qualquer função pode alterá-la e ela existe durante toda a execução do programa.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Organização de um programa}
+
+    Em geral um programa é organizado da seguinte forma:
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+        #include <outras bibliotecas>
+
+        protótipos de funções
+        
+        declaração de Variáveis Globais
+
+        int main() {
+            declaração de variáveis locais à main
+            comandos;
+        }
+
+        int fun1(parâmetros) { /* parâmetros também são variáveis locais */
+            declaração de variáveis locais à fun1
+            comandos;
+        }
+
+        ...
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Escopo de variáveis}
+
+    \begin{itemize}
+        \item O \alert{escopo} de uma variável determina de quais partes do código ela pode ser acessada, ou seja, de quais partes do código a variável é visível.
+        \item A regra de escopo em C é bem simples:
+        \begin{itemize}
+            \item As variáveis globais são visíveis por todas as funções.
+            \item As variáveis locais são visíveis apenas na função onde foram declaradas.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Escopo de variáveis}
+
+    \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+
+        void fun1();
+        int fun2(int local_b);
+
+        int global;
+
+        int main() {
+            int local_main;
+            /* Neste ponto são visíveis global e local_main */
+        }
+
+        void fun1() {
+            int local_a;
+            /* Neste ponto são visíveis global e local_a */
+        }
+    
+        int fun2(int local_b) {
+            int local_c;
+            /* Neste ponto são visíveis global, local_b e local_c */
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Escopo de variáveis}
+
+    \begin{itemize}
+        \item É possível declarar variáveis locais com o mesmo nome de variáveis globais.
+        \item Nesta situação, a variável local ``esconde'' a variável global.
+
+        \begin{minted}[fontsize=\tiny]{c}
+            #include <stdio.h>
+            
+            void fun();
+
+            int nota = 10;
+
+            int main() {
+                nota = 20;
+                fun();
+                printf("%d\n", nota);
+                return 0;
+            }
+
+            void fun() {
+                int nota;
+                nota = 5;
+                /* Neste ponto nota é a variável local de fun. */
+            }
+        \end{minted}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo 1}
+
+    \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+
+        void fun1();
+        void fun2();
+
+        int x;
+        
+        int main() {
+            x = 1;
+            fun1();
+            fun2();
+            printf("main: %d\n", x);
+            return 0;
+        }
+
+        void fun1() {
+            x = x + 1;
+            printf("fun1: %d\n", x);
+        }
+
+        void fun2() {
+            int x = 3;
+            printf("fun2: %d\n", x);
+        }
+    \end{minted}
+    
+    O que será impresso?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo 2}
+
+    \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+        
+        void fun1();
+        void fun2();
+
+        int x = 1;
+        
+        int main() {
+            int x = 1;
+            fun1();
+            fun2();
+            printf("main: %d\n", x);
+            return 0;
+        }
+
+        void fun1() {
+            x = x + 1;
+            printf("fun1: %d\n", x);
+        }
+
+        void fun2() {
+            int x = 4;
+            printf("fun2: %d\n", x);
+        }
+    \end{minted}
+
+    O que será impresso?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo 3}
+
+    \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+
+        void fun1();
+        void fun2(int x);
+
+        int x = 1;
+
+        int main() {
+            x = 2;
+            fun1();
+            fun2(x);
+            printf("main: %d\n", x);
+            return 0;
+        }
+
+        void fun1() {
+            x = x + 1;
+            printf("fun1: %d\n", x);
+        }
+
+        void fun2(int x) {
+            x = x + 1;
+            printf("fun2: %d\n", x);
+        }
+    \end{minted}
+
+    O que será impresso?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Variáveis locais e variáveis globais}
+
+    \begin{itemize}
+        \item O uso de variáveis globais deve ser evitado pois é uma causa comum de erros:
+        \begin{itemize}
+            \item Partes distintas e funções distintas podem alterar a variável global, causando uma grande interdependência entre estas partes distintas de código.
+        \end{itemize}
+        \item A legibilidade do seu código também pode piorar com o uso de variáveis globais:
+        \begin{itemize}
+            \item Ao ler uma função que usa uma variável global é difícil inferir seu valor inicial e portanto qual o resultado da função sobre a variável global.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exemplo utilizando funções}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo utilizando funções}
+
+    Em aulas anteriores vimos como testar se um número em {\bf candidato} é primo:
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        divisor = 2;
+        eh_primo = 1;
+        while (divisor <= candidato/2) {
+            if (candidato % divisor == 0) {
+                eh_primo = 0;
+                break;
+            }
+            divisor++;
+        }
+        if (eh_primo)
+            printf("%d, ", candidato);
+    \end{minted} 
+
+    E usamos isso para imprimir os $n$ primeiros números primos:
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo utilizando funções}
+    \begin{minted}[fontsize=\tiny]{c}
+        int main() {
+            int divisor, n, eh_primo, candidato, primosImpressos;
+            scanf("%d", &n);
+            if (n >= 1) {
+                printf("2, ");
+                primosImpressos = 1;
+                candidato = 3;
+                while (primosImpressos < n) {
+                    divisor = 2;
+                    eh_primo = 1;
+                    while (divisor <= candidato/2) {
+                        if (candidato % divisor == 0) {
+                            eh_primo = 0;
+                            break;
+                        }
+                        divisor++;
+                    }
+                    if (eh_primo) {
+                        printf("%d, ", candidato);
+                        primosImpressos++;
+                    }
+                    candidato = candidato+2; 
+                }
+            }
+            return 0;
+        }
+    \end{minted} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo utilizando funções}
+
+    \begin{itemize}
+        \item Podemos criar uma função que testa se um número é primo ou não (note que isto é exatamente um bloco logicamente bem definido).
+        \item Depois fazemos chamadas para esta função.
+    \end{itemize}
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        int eh_primo(int candidato) {
+            int divisor = 2;
+
+            while (divisor <= candidato/2) {
+                if (candidato % divisor == 0) {
+                    return 0;
+                }
+                divisor++;
+            }
+
+            return 1;
+        }
+    \end{minted} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo utilizando funções}
+
+    \begin{minted}[fontsize=\tiny]{c}
+        #include <stdio.h>
+        
+        int eh_primo(int candidato); /* retorna 1 se candidato é primo, e 0 caso contrário */
+
+        int main() {
+            int n, candidato, primosImpressos;
+
+            scanf("%d", &n);
+
+            if (n >= 1) {
+                printf("2, ");
+                primosImpressos = 1;
+                candidato = 3;
+                while (primosImpressos < n) {
+                    if (eh_primo(candidato)) {
+                        printf("%d, ", candidato);
+                        primosImpressos++;
+                    }
+                    candidato = candidato + 2;
+                }
+            }
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exercícios}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício}
+
+    Escreva uma função que computa a potência $a^b$ para valores $a$ (double) e $b$ (int) passados por parâmetro (não use bibliotecas como math.h).
+    Sua função deve ter o seguinte protótipo:
+
+    \begin{minted}{c}
+        double pot(double a, int b);
+    \end{minted}
+
+    Use a função anterior e crie um programa que imprima todas as potências: $$2^0, 2^1, \ldots, 2^{10}, 3^0, \ldots, 3^{10}, \ldots, 10^{10}.$$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício}
+
+    Escreva uma função que computa o fatorial de um número $n$ passado por parâmetro.
+    Sua função deve ter o seguinte protótipo:
+
+    \begin{minted}{c}
+        long int fat(int n);
+    \end{minted}
+    OBS: Caso $n \leq 0$, seu programa deve retornar 1.
+
+    Use a função anterior e crie um programa calcula o coeficiente binomial de dois números $n$ e $k$ lidos:
+    $${n \choose k} = \frac{n!}{k! (n-k)!}$$
+
+    \alert{Pergunta: o que acontece se você define a função como sendo do tipo \cod{int}?}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício} 
+
+    Escreva uma função em C para computar a raiz quadrada de um número positivo.
+    Use a idéia abaixo, baseada no método de aproximações sucessivas de Newton descrito abaixo.
+
+    Seja $Y$ um número. Sua raiz quadrada é raiz da equação $$f(x) = x^2 - Y \enspace .$$
+    A primeira aproximação é $x_1 = Y/2$.
+    A $(n+1)$-ésima aproximação é
+    $$x_{n+1} = x_n -  \frac{f(x_n)}{f'(x_n)}$$
+
+    A função deverá retornar o valor da vigésima aproximação.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício}
+    
+    Faça um programa que teste quais números de uma sequência fazem parte da sequência de Fibonacci.
+
+    O programa deve receber inicialmente um inteiro $n$. Em seguida, deve receber $n$ números inteiros positivos.
+
+    A resposta consiste de uma única linha, com os números da sequência da entrada que fazem parte da sequência de Fibonacci separados por um espaço.
+
+    Por exemplo, se a entrada é ``\texttt{7 3 9 -7 4 1 0 3}'', então a saída é ``\texttt{3 1 0 3}''.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exercício}
+    
+    Escreva um programa que mostre os dois números primos mais próximos de um dado número $n$.
+    
+    Por exemplo, se $n = 24$, os dois números primos mais próximos dele são $23$ e $29$.
+    Se $n = 47$, então os dois números primos mais próximos dele são $47$ e $53$.
+\end{frame}
+
+\end{document}

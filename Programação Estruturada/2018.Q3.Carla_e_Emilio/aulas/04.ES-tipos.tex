@@ -1,0 +1,674 @@
+% Copyright © 2015
+% Eduardo Candido Xavier <eduardo@ic.unicamp.br>
+%
+% This work is free. You can redistribute it and/or modify it under the
+% terms of the Do What The Fuck You Want To Public License, Version 2,
+% as published by Sam Hocevar. See the COPYING file for more details.
+%
+% DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+% Version 2, December 2004
+%
+% Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+%
+% Everyone is permitted to copy and distribute verbatim or modified
+% copies of this license document, and changing it is allowed as long
+% as the name is changed.
+%
+% DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+% TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+%
+% 0. You just DO WHAT THE FUCK YOU WANT TO.
+
+\documentclass[handout]{beamer}
+\usetheme{metropolis}
+\beamertemplatetransparentcoveredhigh
+
+\usepackage[portuges]{babel}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{xpatch}
+\usepackage[outputdir=build]{minted}
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\makeatother
+\setminted[c]{
+  linenos=true,
+  breaklines=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small,
+}
+\setminted[bash]{
+  linenos=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small
+}
+
+\newcommand{\cod}[1]{\mintinline{c}{#1}}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+\definecolor{Purple}{HTML}{911146}
+\definecolor{Orange}{HTML}{CF4A30}
+\setbeamercolor{alerted text}{fg=Orange}
+\setbeamercolor{frametitle}{bg=Purple}
+\setbeamercolor{block body}{bg=Purple!20,fg=black}
+\setbeamercolor{block title}{bg=Purple!50,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+
+\newcommand{\setcoverbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/coverbg}}
+}
+\newcommand{\setsectionbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/blank}}
+}
+
+\title{Programação Estruturada}
+\subtitle{Entrada e Saída. Mais sobre dados}
+
+\author{Professores Emílio Francesquini e Carla Negri Lintzmayer}
+\institute{Centro de Matemática, Computação e Cognição\\ Universidade Federal do ABC}
+\date{2018.Q3}
+
+\begin{document}
+
+\setcoverbg
+\maketitle
+\setsectionbg
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Saída de dados: printf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Escrevendo na tela}
+    Para imprimir um texto, utilizamos o comando \cod{printf}.
+
+    O texto deve ser uma constante do tipo \textbf{string}.
+
+    \begin{minted}{c}
+        printf("Olá Pessoal!");
+    \end{minted}
+    
+    Saída:
+    \begin{minted}{bash}
+        Olá Pessoal!
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Escrevendo na tela}
+    No meio da constante {\bf string} pode-se incluir caracteres de formatação especiais.
+
+    O símbolo especial \cod{\n} é responsável por pular uma linha na saída.
+
+    \begin{minted}{c}
+        printf("Olá Pessoal!\nOlá Pessoal");
+    \end{minted}
+    
+    Saída:
+    \begin{minted}{bash}
+        Olá Pessoal!
+        Olá Pessoal
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Escrevendo o conteúdo de uma variável na tela}
+    Podemos imprimir também o conteúdo de variáveis.
+    \pause
+    
+    Para isso utilizamos símbolos especiais no texto, para representar que aquele trecho deve ser substituído por uma variável ou constante.
+    \pause
+    
+    No final do \cod{printf} passamos uma lista de variáveis ou constantes, separadas por vírgula.
+    \pause
+
+    \begin{minted}{c}
+        int a = 10;
+        printf("A variável %s contém o valor %d", "a", a);
+    \end{minted}
+    
+    Saída:
+    \begin{minted}{bash}
+        A variável a contém o valor 10
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Escrevendo o conteúdo de uma variável na tela}
+    No comando
+    \begin{minted}{c}
+        int a = 10;
+        printf("A variável %s contém o valor %d", "a", a);
+    \end{minted}
+    \texttt{\%s} vai ser substituído por uma variável/constante do tipo \cod{string} e \texttt{\%d} vai ser substituído por uma variável/constante do tipo \cod{int}.
+
+    \pause
+    É importante que a ordem na lista final de variáveis ou constantes seja a mesma ordem que os símbolos aparecem no texto.
+
+    O comando a seguir está errado:
+    \begin{minted}{c}
+        int a = 10;
+        printf("A variável %s contém o valor %d", a, "a");
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formatos inteiros}
+
+    \textbf{\%d} --- Escreve um inteiro na tela.
+
+    \begin{minted}{c}
+        printf("%d\n", 10);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        10
+    \end{minted}
+
+    \pause
+    \begin{minted}{c}
+        int a = 12;
+        printf("O valor é %d\n", a);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        O valor é 12
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formatos inteiros}
+
+    O formato {\bf \%d} pode ser substituído por {\bf \%u} e {\bf \%ld} se desejarmos escrever variáveis \cod{unsigned} ou \cod{long int}, respectivamente.
+
+    \begin{minted}{c}
+        printf("%d\n", 4000000000);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        -294967296
+    \end{minted}
+
+    \pause
+    \begin{minted}{c}
+        printf("%ld\n", 4000000000);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        4000000000
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formatos ponto flutuante}
+
+    \textbf{\%f} --- Escreve um ponto flutuante na tela.
+
+    \begin{minted}{c}
+        printf("%f\n", 10.0);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        10.000000
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formatos ponto flutuante}
+
+    \textbf{\%.$N$f} --- Escreve um ponto flutuante na tela com $N$ casas decimais.
+
+    \begin{minted}{c}
+        printf("%.2f\n", 10.1111);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        10.11
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formatos ponto flutuante}
+
+    O formato {\bf \%f} pode ser substituído por {\bf \%lf} para escrever um \cod{double} ao invés de um \cod{float}.
+
+    \begin{minted}{c}
+        double a = 10.0;
+        printf("%.2lf\n", a);
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        10.00
+    \end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formato caractere}
+
+    \textbf{\%c} --- Escreve um caractere.
+
+    \begin{minted}{c}
+        printf("%c\n", 'A');
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        A
+    \end{minted}
+
+    Veremos que o comando \texttt{printf("\%c\textbackslash n", 65)} também imprime a letra A.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formato {\bf string}}
+
+    \textbf{\%s} --- Escreve uma {\bf string}.
+
+    \begin{minted}{c}
+        printf ("%s\n", "Meu primeiro programa");
+    \end{minted}
+    Saída:
+    \begin{minted}{bash}
+        Meu primeiro programa
+    \end{minted}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Entrada de dados: scanf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{A função {\bf scanf}}
+
+    \begin{itemize}[<+->]
+        \item Realiza a leitura de dados a partir do teclado.
+        \item Parâmetros:
+        \begin{itemize}
+            \item Uma {\bf string}, indicando os tipos das variáveis que serão lidas e o formato dessa leitura.
+            \item Uma lista de variáveis.
+        \end{itemize}
+        \item Aguarda que o usuário digite um valor e atribui o valor digitado à variável.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{A função {\bf scanf}}
+
+    O programa abaixo é composto de quatro passos:
+    \begin{enumerate}
+        \item Cria uma variável {\bf n}
+        \item Escreve na tela a string ``Digite um número:''
+        \item Lê o valor do número digitado e o salva em \textbf{n}
+        \item Imprime o valor do número digitado
+    \end{enumerate}
+
+    \begin{minted}{c}
+        #include <stdio.h>
+        int main() {
+            int n;
+            printf("Digite um número: ");
+            scanf("%d", &n); /* note a presença do caractere & */
+            printf("O valor digitado foi %d\n",n);
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Formatos de leitura de variável}
+    No \cod{scanf}, cada variável para onde será lido um valor deve ser precedida do caractere {\bf \&}.
+    \pause
+
+    Os formatos de leitura são muito semelhantes aos formatos de escrita do {\bf printf}.
+  
+    \begin{center}
+        \begin{tabular} {|l|l|}
+            \hline \textbf{Código} & \textbf{Função} \\
+            \hline  \%c & Lê um único caractere \\
+            \%s & Lê uma série de caracteres (string) \\
+            \%d & Lê um número decimal \\
+            \%u & Lê um decimal sem sinal \\
+            \%ld & Lê um inteiro longo \\
+            \%f & Lê um número em ponto flutuante \\
+            \%lf & Lê um double \\ \hline
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{A função {\bf scanf}}
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+
+        int main() {
+            char c;
+            float b;
+            int a;
+
+            printf("Digite um caractere: ");
+            scanf("%c", &c);
+            printf("Digite um ponto flutuante: ");
+            scanf("%f", &b);
+            printf("Digite um inteiro: ");
+            scanf("%d", &a);
+
+            printf("Os dados lidos foram: %c, %f e %d.\n",c,b,a);
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{A função {\bf scanf}}
+    No exemplo anterior, os textos ``Digite \ldots'' aparecem na saída padrão.
+
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+
+        int main() {
+            char c;
+            float b;
+            int a;
+
+            scanf("%c", &c);
+            scanf("%f", &b);
+            scanf("%d", &a);
+
+            printf("Os dados lidos foram: %c, %f e %d.\n",c,b,a);
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{A função {\bf scanf}}
+
+    É possível ler várias variáveis em um mesmo comando \cod{scanf}, basta especificar todos os formatos das variáveis a serem lidas e depois as variáveis separadas por vírgulas.
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            int m, n, o;
+            printf("Digite três números: ");
+            scanf("%d %d %d", &m, &n, &o);
+            printf("O valores digitados foram %d, %d e %d\n", m, n, o);
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Informações extras sobre tipos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Constantes inteiras}
+
+    Possíveis formas de escrita em C de um número inteiro:
+
+    \begin{itemize}[<+->]
+        \item Normalmente
+
+        Ex: \cod{10}, \cod{145}, \cod{1000000}
+
+        \item Na forma hexadecimal (base 16), precedido de 0x
+
+        Ex: \cod{0xA} ($0xA_{16} = 10$), \cod{0x100} ($0x100_{16} = 256$)
+
+        \item Na forma octal (base 8), precedido de 0
+
+        Ex: \cod{010} ($0x10_{8} = 8$)
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Constantes do tipo ponto flutuante}
+
+    \begin{itemize}[<+->]
+      \item Um número só pode ser considerado ponto flutuante se tiver uma parte ``não inteira'', mesmo que ela tenha valor zero.
+
+      Ex: \cod{10.0}, \cod{5.0}, \cod{4.7}
+
+      \item Um número ponto flutuante pode ser escrito em notação científica: um número seguido da letra {\bf e} e um expoente. Um número escrito dessa forma deve ser interpretado como: $$\mbox{numero} \times 10^{\mbox{expoente}}$$
+
+      Ex: \cod{2e2} ($2 \cdot 10^2 = 200.0$)
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Caracteres}
+    \begin{itemize}[<+->]
+        \item Caracteres são, na verdade, variáveis inteiras que armazenam um número associado ao símbolo
+        
+        \item Talvez a tabela de símbolos mais famosa utilizada pelos computadores é a tabela ASCII\footnote{Pronúncia correta: ás-ki.} (\emph{American Standard Code for Information Interchange}), mas existem outras (EBCDIC, Unicode, etc.)
+        
+        \item Uma variável do tipo {\tt char} armazena um símbolo (no caso, o inteiro correspondente ao símbolo). Seu valor pode ir de -128 a 127 (1 byte).
+
+    % \item {\tt unsigned char:} Armazena um símbolo (no caso, o inteiro correspondente).  Seu valor pode ir de 0 a 255.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Tabela ASCII}
+    \scriptsize
+    \begin{tabular}{r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10 &11 &12 &13 &14 &15 \\
+        \hline
+        0 & \multicolumn{16}{|c|}{caracteres de Controle}\\
+        16 & \multicolumn{16}{|c|}{}\\
+        \hline
+        32 &   & ! & " & \# & \$ & \% & \& & ' & ( & ) & * & + & , & - & . & / \\
+        \hline
+        48 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & : & ; & $<$ & = & $>$ & ? \\
+        \hline
+        64 & @ & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O \\
+        \hline
+        80 & P & Q & R & S & T & U & V & W & X & Y & Z & $[$ & $\backslash$ & $]$ & $\wedge$ & \_ \\
+        \hline
+        96 & \`{} & a & b & c & d & e & f & g & h & i & j & k & l & m & n & o \\
+        \hline
+        112 & p & q & r & s & t & u & v & w & x & y & z & \{ & $\vert$ & \} & $\sim$ &  \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Caracteres}
+    Toda constante do tipo caractere pode ser usada como uma constante do tipo inteiro e vice-versa.
+    
+    Nesse caso, o valor atribuído será o valor daquela letra na tabela ASCII.
+
+    \begin{minted}{c}
+        int a;
+        char b;
+
+        b = 65;
+        printf("Valor de b: %c\n", b);
+
+        a = 'C';
+        printf("Valor de a: %d\n", a);
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Caracteres}
+    Qual a saída do programa a seguir?
+    \begin{minted}{c}
+        char b = 130;
+
+        printf("%c %d\n", b, b);
+    \end{minted}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Comentários}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Comentários}
+    \begin{itemize}
+        \item É comum incluir comentários em um programa para explicar certas partes do código e ajudar na sua compreensão.
+        \item Os comentários são ignorados pelo compilador.
+        \item Um comentário de uma linha deve ser escrito depois de {\bf //}\footnote{Comentários de uma linha não são permitidos em ANSI C.}.
+        \item Um comentário também pode ser escrito entre \textbf{/*} e \textbf{*/}. Neste caso pode haver mais de uma linha de comentário.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Comentários}
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            int a; //isto é um comentário
+
+            int b; /* isto
+                      também é
+                      um comentário */
+
+            a = 2;
+            b = 3;
+            a = a + b;
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conversão de tipos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Conversão de tipos}
+    \begin{itemize}[<+->]
+        \item É possível converter alguns tipos entre si, o que pode ser da forma implícita ou explícita.
+        \item Na forma \textbf{implícita}, atribui-se diretamente um dado de um tipo para uma variável de outro tipo.
+        \item Para isso, a capacidade (tamanho) do destino deve ser maior ou igual ao tamanho da origem, senão há perda de informação.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Conversão implícita de tipos}
+    \begin{minted}[fontsize=\scriptsize]{c}
+        #include <stdio.h>
+        int main() {
+            int a = 9;
+            double b;
+
+            b = a;
+            printf("a: %d e b: %lf\n", a, b);
+            
+            b = 5.56;
+            a = b;
+            printf("a: %d e b: %lf\n", a, b);
+            
+            b = 4000000000.56;
+            a = b;
+            printf("a: %d e b: %lf\n", a, b);
+            
+            printf("Tamanho em bytes de um double: %ld\n", sizeof(double));
+            printf("Tamanho em bytes de um int: %ld\n", sizeof(int));
+            return 0;
+        }
+      \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Conversão de tipos}
+
+    Na conversão \textbf{explícita}, nós explicitamente informamos o tipo para o qual o valor da variável ou expressão será convertido.
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            double b;
+
+            b = ((double) 5 / (double) 2);
+            printf("%lf\n", b);
+
+            b =  5 / 2;
+            printf("%lf\n", b);
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Um uso da conversão de tipos}
+
+    A operação de divisão (\cod{/}) possui dois modos de operação de acordo com os seus argumentos: inteira ou de ponto flutuante.
+    \begin{itemize}
+        \item Se os dois argumentos forem inteiros, acontece a divisão inteira.
+        A expressão \cod{10 / 3} tem como valor \cod{3}.
+        \item Se \alert{um} dos dois argumentos for de ponto flutuante, acontece a divisão de ponto flutuante.
+        A expressão \cod{1.5 / 3} tem como valor \cod{0.5}.
+    \end{itemize}
+
+    \pause
+    Quando se deseja obter o valor de ponto flutuante de uma divisão (não-exata) de dois inteiros, basta converter um deles para ponto flutuante: a expressão \cod{10 / (float) 3} tem como valor \cod{3.33333333}.
+
+    \pause
+    Isso é especialmente útil quando se tem variáveis na expressão.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

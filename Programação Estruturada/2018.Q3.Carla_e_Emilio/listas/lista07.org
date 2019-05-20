@@ -1,0 +1,78 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: pt_br
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+#+LATEX_HEADER: \usepackage{color}
+#+MACRO: color @@latex:\textcolor{$1}{$2}@@
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA028-15 - Programação Estruturada {{{CrLf}}} 2018.Q3
+#+SUBTITLE: *Lista de Exercícios 7*
+#+AUTHOR:   Professores Emílio Francesquini e Carla Negri Lintzmayer
+
+1. Altere os algoritmos de ordenação vistos em aula para que eles ordenem um vetor de inteiros em ordem decrescente ao invés de ordem crescente.
+
+2. Altere os algoritmos de ordenação vistos em aula para que eles lidem com números repetidos.
+
+3. Considere os algorimos de ordenação vistos em aula (SelectionSort, InsertionSort, MergeSort e BubbleSort) e responda:
+   a. Quantos acessos ao vetor cada um dos algoritmos faz?
+   b. Quantas comparações entre elementos do vetor cada um dos algoritmos faz?
+   c. Quantas trocas de elementos do vetor cada um dos algortimos faz?
+
+4. O SelectionSort visto em aula escolhe o menor elemento do vetor a partir da posição $i$ e o troca pelo elemento na posição $i$ para colocar o vetor em ordem crescente.
+   Escreva uma variação do SelectionSort que em vez de colocar os menores elementos no início do vetor para deixá-lo em ordem, o faça colocando os maiores no final do vetor.
+   Mais especificamente seu algoritmo deve encontrar o maior elemento do vetor até a posição $n - i -1$ e colocá-lo na posição $n - i - 1$.
+
+5. Considere a seguinte estrutura:
+
+   #+BEGIN_SRC C
+    struct aluno {
+        unsigned int RA;
+        double nota;
+        char nome[50]
+    };
+    typedef struct aluno Aluno;
+   #+END_SRC
+
+   Faça uma programa que, dado um valor `n`, aloque um vetor de `Aluno` dinamicamente e leia do teclado todas as informações sobre `n` alunos (nome, nota, RA).
+   Imprima três listas de alunos, sendo cada linha de uma lista no formato "`Nome - RA - Nota`".
+   A primeira lista deve estar ordenada de acordo com o nome.
+   A segunda deve estar ordenada de acordo com o RA.
+   A terceira deve estar ordenada de acordo com a nota.
+
+6. [PF] Escreva uma função que verifica se um vetor `v[0..n-1]` está em ordem crescente.
+
+7. [PF] A seguinte função promete verificar se um vetor `v[0..n-1]` está em ordem crescente.
+   Ela funciona?
+
+   #+BEGIN_SRC C
+     int verifica(int v[], int n) {
+         int sim;
+         for (int i = 1; i < n; i++)
+             if (v[i-1] <= v[i])
+                 sim = 1;
+             else {
+                 sim = 0;
+                 break;
+             }
+         return sim;
+     }
+   #+END_SRC
+
+8. [PF] Escreva uma versão recursiva do algoritmo Selection Sort.
+
+9. [PF] Uma palavra é anagrama de outra se a sequência de letras de uma é permutação da sequência de letras da outra.
+   Por exemplo, `aberto` é anagrama de `rebato`.
+   Dizemos que duas palavras são /equivalentes/ se uma é anagrama da outra.
+   Uma /classe de equivalência/ de palavras é um conjunto de palavras duas a duas equivalentes.
+   Escreva um programa que receba um arquivo ASCII contendo palavras (uma por linha) e extraia desse arquivo uma classe de equivalência máxima.
+   Aplique o seu programa a um [[https://www.ime.usp.br/~pf/dicios/br-sem-acentos.txt][{{{color(blue,arquivo que contém todas as palavras do português brasileiro com diacríticos removidos)}}}]].
+   (O arquivo é grande; portanto, o seu programa deverá ser muito eficiente.)
+
+10. Implemente todos os algoritmos vistos em aula e compare o desempenho entre eles.
+    Para fazê-lo, utilize o código abaixo ([[http://professor.ufabc.edu.br/~e.francesquini/2018.q3.pe/files/listas/lista7_ordenacao.c][{{{color(blue,baixe aqui)}}}]]) para gerar um vetor de tamanho $n$ passado como parâmetro.
+
+    #+INCLUDE: "./lista7_ordenacao.c" src C

@@ -1,0 +1,124 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: pt_br
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA028-15 - Programação Estruturada {{{CrLf}}} 2018.Q3
+#+SUBTITLE: *Lista de Exercícios 5*
+#+AUTHOR:   Professores Emílio Francesquini e Carla Negri Lintzmayer
+
+
+1. Determine o valor de cada item abaixo considerando que foram executados os seguintes comandos (assuma que o endereço de x é 1000 e de y é 1004):
+
+    #+BEGIN_SRC C
+    int x = 10, y = 20;
+    int *p1;
+    int *p2;
+    p1 = &x;
+    p2 = &y;
+    (*p1)++;
+    #+END_SRC
+
+    a. ~x~
+    b. ~y~
+    c. ~&x~
+    d. ~&y~
+    e. ~p1~
+    f. ~p2~
+    g. ~*p1 + *p2~
+    h. ~*(&x)~
+    i. ~&(*p2)~
+
+2. O que é impresso pelo seguinte trecho de código no seu computador e o que isso significa?
+
+    #+BEGIN_SRC C
+    int x, y[10], *z;
+    double s, *t;
+    char q, r[5];
+    printf("%lu %lu %lu %lu %lu %lu %lu\n", sizeof(x), sizeof(y),
+            sizeof(z), sizeof(s), sizeof(t), sizeof(q), sizeof(r));
+    #+END_SRC
+
+3. Sem usar computador, diga o que é impresso pelo trecho de código abaixo e explique o que significa cada um dos valores impressos.
+
+    #+BEGIN_SRC C
+    int a = 25;
+    int *pa = &a;
+    int b = *pa + a;
+    printf("%d %d %d %d %d %d\n", a, pa, &a, *pa, b, &b);
+    #+END_SRC
+
+4. O que faz o seguinte programa quando executado?
+
+    #+BEGIN_SRC C
+    int main() {
+        int vet[] = {4,9,12};
+        int i, *ptr;
+        ptr = vet;
+        for (i = 0; i < 3; i++) {
+            printf("%d ", *ptr++);
+        }
+        return 0;
+    }
+    #+END_SRC
+
+5. O que faz o seguinte programa quando executado?
+
+    #+BEGIN_SRC C
+    int main() {
+        int vet[] = {4,9,12};
+        int i, *ptr;
+        ptr = vet;
+        for (i = 0; i < 3; i++) {
+            printf("%d ", (*ptr)++);
+        }
+        return 0;
+    }
+    #+END_SRC
+
+6. Considere o trecho de código a seguir:
+
+    #+BEGIN_SRC C
+    int i = 3,j = 5;
+    int *p, *q;
+    p = &i;
+    q = &j;
+    #+END_SRC
+
+    Qual o valor das expressões:
+    a. ~p == &i~
+    b. ~*p - *q~
+    c. ~**&p~
+    d. ~3* - *p/(*q)+7~
+
+7. O código abaixo está errado. Por que?
+
+    #+BEGIN_SRC C
+    void troca(int *i, int *j) {
+        int *temp;
+        *temp = *i;
+        *i = *j;
+        *j = *temp;
+    }
+    #+END_SRC
+
+8. Seja ~v~ um vetor de inteiros.
+   Suponha que cada ~int~ ocupa 8 bytes no seu computador.
+   Se o endereço de ~v[0]~ é 55000, qual o valor da expressão ~v+3~?
+
+9. Suponha que o vetor ~v~ e a variável ~k~ foram declarados assim:
+
+    #+BEGIN_SRC C
+    int v[100], k;
+    #+END_SRC
+
+    Suponha que ambos já foram inicializados e alterados algumas vezes por um programa.
+    Descreva, em português, a sequência de operações que deve ser executada para calcular o valor da expressão ~&v[k+9]~.
+    Por exemplo, para calcular o valor de ~b + 5 * c~, a sequência de operações é "multiplicar ~c~ por 5 e somar esse valor com ~b~".
+
+10. Faça uma função chamada *primo* que recebe como parâmetro um inteiro $m$ e dois ponteiros para inteiros $p_1$ e $p_2$.
+    A função deve retornar em $p_1$ o maior número primo que é menor do que $m$ e deve retornar em $p_2$ o menor número primo que é maior do que $m$.

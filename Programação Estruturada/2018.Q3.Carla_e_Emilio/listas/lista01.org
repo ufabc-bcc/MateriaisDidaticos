@@ -1,0 +1,126 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: pt_br
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA028-15 - Programação Estruturada {{{CrLf}}} 2018.Q3
+#+SUBTITLE: *Lista de Exercícios 1*
+#+AUTHOR:   Professores Emílio Francesquini e Carla Negri Lintzmayer
+
+1. Qual é o tipo de variável correta para armazenar as seguintes informações:
+
+   a. A idade.
+   b. O número de estrelas na galáxia.
+   c. A quantidade de chuva média no mês de fevereiro.
+   d. A área do seu quintal.
+
+2. Indique a diferença entre as seguintes atribuições:
+
+   #+BEGIN_SRC C
+   char a;
+   a = '6';
+   a = 6;
+   #+END_SRC
+
+3. Faça um programa que leia um número real ~x~ e calcule o valor de
+   $f(x) = \sqrt{x} + (x/2) + x^x$ (pesquise sobre as funções ~sqrt~ e
+   ~pow~).
+
+4. Faça um programa que leia dois valores inteiros nas variáveis ~x~ e
+   ~y~ e troque o conteúdo as variáveis. Refaça este problema sem o
+   uso de outras variáveis que não ~x~ e ~y~.
+
+5. Faça um programa que leia o valor da base e altura de um triângulo
+   e calcule o valor da sua área.
+
+6. Faça um programa que leia os valores correspondentes aos três lados
+   ~a~, ~b~ e ~c~ de um triângulo. O programa deve então calcular a
+   área /A/ do triângulo utilizando a fórmula de Heron:
+
+   \begin{equation*}
+     A = \sqrt{s(s-a)(s-b)(s-c)}
+   \end{equation*}
+   onde
+   \begin{equation*}
+     s = \frac{a + b + c}{2}
+   \end{equation*}
+
+   Ao calcular a área pela fórmula de Heron e a fórmula da questão
+   anterior, em alguns casos obtemos valores ligeiramente
+   diferentes. Qual o motivo disto?
+
+7. Faça um programa que lê o raio de um disco e imprime sua área e seu
+   perímetro.
+
+8. A solução abaixo está correta para classificar um número como par e
+   menor que 100, ou par e maior ou igual a 100, etc?
+   #+BEGIN_SRC c
+       #include <stdio.h>
+       int main() {
+           int a;
+           printf("Digite um número inteiro:");
+           scanf("%d", &a);
+           if (( a % 2 == 0) && (a < 100))
+               printf("O número é par e menor que 100\n");
+           else if (a >= 100)
+               printf("O número é par e maior ou igual a 100\n");
+           if ((a % 2 != 0) && (a < 100))
+               printf("O número é ímpar e menor que 100\n");
+           else if (a >= 100)
+               printf("O número é ímpar e maior que 100\n");
+           return 0;
+       }
+   #+END_SRC
+
+9. Escreva um programa que lê três números e os imprime em ordem (ordem
+   crescente).
+
+10. Faça um programa que lê um caractere ~'F'~ ou ~'C'~, que indica se
+    o próximo número a ser digitado corresponde a uma temperatura em
+    Fahrenheit ou Celsius. Em seguida o programa deve ler o valor da
+    temperatura e então imprimir o valor correspondente da temperatura
+    na outra unidade de medida. Obs.: $C = \frac{5(F - 32)}{9}$)
+
+11. Faça um programa que leia um ano (valor inteiro) e imprima se ele
+    é bissexto ou não. Obs: São bissextos todos os anos múltiplos
+    de 400. Não sendo múltiplo de 400, são bissextos todos os anos
+    múltiplos de 4 mas que não são múltiplos de 100.
+
+12. Faça um programa que leia os três lados de um triângulo e informe
+    se ele é isósceles, escaleno ou equilátero. Obs: equilátero:
+    possui os três lados iguais; isósceles: possui pelo menos dois
+    lados iguais; escaleno: três lados distintos.
+
+13. Escreva um programa que determina a data cronologicamente maior de
+    duas datas fornecidas pelo usuário. Cada data deve ser fornecida
+    por três valores inteiros onde o primeiro representa um dia, o
+    segundo um mês e o terceiro um ano.
+
+14. Escreva um programa que lê uma coordenada ~(x, y)~ do teclado e
+    imprime como resposta o quadrante em que a coordenada está.
+
+15. Uma pessoa pode se aposentar pelo INSS caso esteja em alguma das
+    situações abaixo:
+
+    a. É do sexo masculino, possui pelo menos 65 anos, e pelo menos 10
+       anos de contribuição.
+
+    b. É do sexo masculino, possui pelo menos 63 anos, e pelo menos 15
+       anos de contribuição.
+
+    c. É do sexo feminino, possui pelo menos 63 anos, e pelo menos 10
+       anos de contribuição.
+
+    d. É do sexo feminino, possui pelo menos 61 anos, e pelo menos 15
+       anos de contribuição.
+
+
+    Crie um programa para ler um caractere ~'M'~ ou ~'F'~ que representa o
+    sexo de um indivíduo, ler a sua idade e seu tempo de
+    contribuição. O programa deverá então imprimir “Aposentável”
+    caso o indivíduo se enquadrar em uma das situações acima. Caso
+    contrário o programa deverá imprimir “Não Aposentável”.

@@ -1,0 +1,376 @@
+%    Copyright © 2015
+%  Eduardo Candido Xavier <eduardo@ic.unicamp.br>
+%
+%  This work is free. You can redistribute it and/or modify it under the
+%  terms of the Do What The Fuck You Want To Public License, Version 2,
+%  as published by Sam Hocevar. See the COPYING file for more details.
+%
+%  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+%                   Version 2, December 2004
+%
+%   Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+%
+%   Everyone is permitted to copy and distribute verbatim or modified
+%   copies of this license document, and changing it is allowed as long
+%   as the name is changed.
+%
+%  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+%   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+%
+%      0. You just DO WHAT THE FUCK YOU WANT TO.
+
+\documentclass[handout]{beamer}
+\usetheme{metropolis}
+\beamertemplatetransparentcoveredhigh
+
+\usepackage[portuges]{babel}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{xpatch}
+\usepackage[outputdir=build]{minted}
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\makeatother
+\setminted[c]{
+  linenos=true,
+  breaklines=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small,
+}
+\setminted[bash]{
+  linenos=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small
+}
+
+\newcommand{\cod}[1]{\mintinline{c}{#1}}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+\definecolor{Purple}{HTML}{911146}
+\definecolor{Orange}{HTML}{CF4A30}
+\setbeamercolor{alerted text}{fg=Orange}
+\setbeamercolor{frametitle}{bg=Purple}
+\setbeamercolor{block body}{bg=Purple!20,fg=black}
+\setbeamercolor{block title}{bg=Purple!50,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+
+\newcommand{\setcoverbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/coverbg}}
+}
+\newcommand{\setsectionbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/blank}}
+}
+
+\title{Programação Estruturada}
+\subtitle{Operações e expressões relacionais e lógicas}
+
+\author{Professores Emílio Francesquini e Carla Negri Lintzmayer}
+\institute{Centro de Matemática, Computação e Cognição\\ Universidade Federal do ABC}
+\date{2018.Q3}
+
+\begin{document}
+
+\setcoverbg
+\maketitle
+\setsectionbg
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressão}
+    \begin{itemize}[<+->]
+        \item Já vimos que constantes e variáveis são expressões.
+        \begin{minted}{c}
+            a = 10;
+            a = b;
+        \end{minted}
+
+        \item Vimos também que operações aritméticas também são expressões.
+        \begin{minted}{c}
+            a = 2 + 2;
+            a = 10 / 3;
+            a = a + 1;
+            a = (2 + 5) * (10 % 4);
+        \end{minted}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Expressões relacionais}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões relacionais}
+
+    \textbf{Expressões relacionais} são aquelas que realizam uma comparação entre duas expressões e têm valor
+
+    \begin{itemize}
+        \item {\bf zero ($0$)}, se o resultado é falso
+        \item {\bf um ($1$) ou qualquer outro número diferente de zero}, se o resultado é verdadeiro
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Operadores relacionais}
+
+    Os operadores relacionais da linguagem C são:
+
+    \begin{center}
+        \begin{tabular}{|c|l|}
+            \hline
+            \cod{==} & igualdade \\
+            \cod{!=} & diferença \\
+            \cod{>}  & maior que \\
+            \cod{<}  & menor que \\
+            \cod{>=} & maior ou igual a \\
+            \cod{<=} & menor ou igual a \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões relacionais}
+
+    \begin{itemize}[<+->]
+        \item {\it expressão} \cod{==} {\it expressão} \\
+        Tem valor verdadeiro quando as expressões forem iguais.
+        \begin{itemize}
+            \item \cod{9 == 9}: tem resultado 1, verdadeiro
+            \item \cod{9 == 10}: tem resultado 0, falso
+        \end{itemize}
+
+        \item {\it expressão} \cod{!=} {\it expressão} \\
+        Tem valor verdadeiro quando as expressões forem diferentes.
+        \begin{itemize}
+            \item \cod{9 != 9}: tem resultado 0, falso
+            \item \cod{9 != 10}: tem resultado 1, verdadeiro
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões relacionais}
+
+    \begin{itemize}
+        \item {\it expressão} \cod{>} {\it expressão} \\
+        Tem valor verdadeiro quando a expressão da esquerda tiver valor maior do que a expressão da direita.
+        \begin{itemize}
+            \item \cod{9 > 5}: tem resultado 1, verdadeiro
+            \item \cod{9 > 9}: tem resultado 0, falso
+        \end{itemize}
+
+        \item {\it expressão} \cod{<} {\it expressão} \\
+        Tem valor verdadeiro quando a expressão da esquerda tiver valor menor do que a expressão da direita.
+        \begin{itemize}
+            \item \cod{9 < 5}: tem resultado 0, falso
+            \item \cod{-5 < 0}: tem resultado 1, verdadeiro
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões relacionais}
+
+    \begin{itemize}
+        \item {\it expressão} \cod{>=} {\it expressão} \\
+        Tem valor verdadeiro quando a expressão da esquerda tiver valor maior ou igual ao valor da expressão da direita.
+        \begin{itemize}
+            \item \cod{9 >= 5}: tem resultado 1, verdadeiro
+            \item \cod{-5 >= 0}: tem resultado 0, falso
+        \end{itemize}
+
+        \item {\it expressão} \cod{<=} {\it expressão} \\
+        Retorna verdadeiro quando a expressão da esquerda tiver valor menor ou igual ao valor da expressão da direita.
+        \begin{itemize}
+            \item \cod{9 <= 5}: tem resultado 0, falso
+            \item \cod{9 <= 9}: tem resultado 1, verdadeiro
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo}
+
+    O que será impresso pelo programa?
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            int a, b;
+
+            printf("%d\n", 9 > 3);
+            printf("%d\n", (3*4)/2 != (2*3));
+
+            a = 1;
+            b = -1;
+            printf("%d\n", a != b);
+
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Expressões lógicas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões lógicas}
+
+    \textbf{Expressões lógicas} são aquelas que realizam uma operação lógica (conjunção, disjunção, negação, etc.) e têm valor verdadeiro ou falso (como as expressões relacionais).
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Operadores lógicos}
+    Na linguagem C temos os seguintes operadores lógicos:
+
+    \begin{center}
+        \begin{tabular}{|c|l|}
+            \hline
+            \cod{&&} & operador de conjunção (E) \\
+            \cod{||} & operador de disjunção (OU) \\
+            \cod{!} & operador de negação (NÃO) \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões lógicas}
+
+    \begin{itemize}
+        \item {\it expressão} \cod{&&} {\it expressão} \\
+        Retorna verdadeiro quando ambas as expressões são verdadeiras.
+
+        \begin{center}
+            \begin{tabular}{|c|c||c|}
+                \hline
+                $Op_1$ & $Op_2$ & $Valor$ \\ \hline
+                V & V & V \\
+                V & F & F \\
+                F & V & F \\
+                F & F & F \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{itemize}
+
+    Qual o valor de \cod{v} abaixo?
+    \begin{minted}{c}
+        a = 0;
+        b = 0;
+        v = (a == 0 && b == 0);
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões lógicas}
+
+    \begin{itemize}
+        \item {\it expressão} \cod{||} {\it expressão} \\
+        Retorna verdadeiro quando pelo menos uma das expressões é verdadeira.
+
+        \begin{center}
+            \begin{tabular}{|c|c||c|}
+                \hline
+                $Op_1$ & $Op_2$ & $Valor$ \\ \hline
+                V & V & V \\
+                V & F & V \\
+                F & V & V \\
+                F & F & F \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{itemize}
+
+    Qual o valor de \cod{v} abaixo?
+    \begin{minted}{c}
+        a = 0;
+        b = 1;
+        v = (a == 0 || b == 0);
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Expressões lógicas}
+
+    \begin{itemize}
+        \item \cod{!} {\it expressão} \\
+        Retorna verdadeiro quando a expressão é falsa e vice-versa.
+
+        \begin{center}
+            \begin{tabular}{|c||c|}
+                \hline
+                $Op_1$ & $Valor$ \\ \hline
+                V & F \\
+                F & V \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{itemize}
+
+    Qual o valor de \cod{v} abaixo?
+    \begin{minted}{c}
+        a = 0;
+        b = 1;
+        v = !(a != b);
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Exemplo}
+    O que será impresso pelo programa?
+
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            printf("%d\n", (8 > 9) && (10 != 2));
+            printf("%d\n", (14 > 100) || (2 > 1));
+            printf("%d\n", (!(14 > 100) && !(1 > 2)));
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+\end{document}

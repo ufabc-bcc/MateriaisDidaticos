@@ -1,0 +1,79 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:latexdraw="http://latexdraw.sourceforge.net/namespaces/latexdraw"
+    version="1.1" baseProfile="full">
+    <g>
+        <g latexdraw:type="square" id="id927986023">
+            <rect x="201.0" y="101.0" width="38.0" height="38.0"
+                latexdraw:borderPos="outer" stroke-width="2.0"
+                stroke="black" fill="none"/>
+        </g>
+        <g latexdraw:type="square" id="id1420882450">
+            <rect x="101.0" y="101.0" width="38.0" height="38.0"
+                latexdraw:borderPos="outer" stroke-width="2.0"
+                stroke="black" fill="none"/>
+        </g>
+        <g latexdraw:type="square" id="id702887255">
+            <rect x="281.0" y="101.0" width="38.0" height="38.0"
+                latexdraw:borderPos="outer" stroke-width="2.0"
+                stroke="black" fill="none"/>
+        </g>
+        <g latexdraw:type="square" id="id991950032">
+            <rect x="241.0" y="101.0" width="38.0" height="38.0"
+                latexdraw:borderPos="outer" stroke-width="2.0"
+                stroke="black" fill="none"/>
+        </g>
+        <g latexdraw:type="text" id="id1792901549" fill="black" latexdraw:position="bl">
+            <text x="114.0" y="90.0"><![CDATA[v]]></text>
+        </g>
+        <g latexdraw:type="text" id="id228249026" fill="black" latexdraw:position="bl">
+            <text x="108.0" y="126.0"><![CDATA[548]]></text>
+        </g>
+        <g latexdraw:type="text" id="id372882799" fill="black" latexdraw:position="bl">
+            <text x="185.0" y="156.0"><![CDATA[ende:548]]></text>
+        </g>
+        <g latexdraw:type="joinedLines" id="id392443945">
+            <polyline points="140.0,120.0 200.0,120.0 "
+                stroke-width="2.0" stroke="black"
+                latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-392443945)"/>
+        </g>
+        <g latexdraw:type="text" id="id1089698052" fill="black" latexdraw:position="bl">
+            <text x="207.0" y="125.0"><![CDATA[10]]></text>
+        </g>
+        <g latexdraw:type="text" id="id2048750669" fill="black" latexdraw:position="bl">
+            <text x="251.0" y="125.0"><![CDATA[20]]></text>
+        </g>
+        <g latexdraw:type="text" id="id909936884" fill="black" latexdraw:position="bl">
+            <text x="293.0" y="125.0"><![CDATA[30]]></text>
+        </g>
+    </g>
+    <defs>
+        <marker overflow="visible" orient="auto" id="arrow1-392443945">
+            <path
+                d="M 0.0 0.0 L -4.652083333333334 1.6614583333333335 L -4.652083333333334 0.0 L -4.652083333333334 -1.6614583333333335 z "
+                latexdraw:arrSizeNum="2.0" fill="black"/>
+        </marker>
+    </defs>
+    <metadata>
+        <latexdraw:metadata>
+            <latexdraw:latexIncludes><![CDATA[
+]]></latexdraw:latexIncludes>
+            <latexdraw:displayXScale>true</latexdraw:displayXScale>
+            <latexdraw:displayYScale>true</latexdraw:displayYScale>
+            <latexdraw:unit>CM</latexdraw:unit>
+            <latexdraw:zoom>1.0</latexdraw:zoom>
+            <latexdraw:magneticGridStyle>CUSTOMISED</latexdraw:magneticGridStyle>
+            <latexdraw:gridGap>20</latexdraw:gridGap>
+            <latexdraw:magneticGrid>false</latexdraw:magneticGrid>
+            <latexdraw:version>3.3.1</latexdraw:version>
+            <latexdraw:size>
+                <latexdraw:width>1440</latexdraw:width>
+                <latexdraw:height>900</latexdraw:height>
+            </latexdraw:size>
+            <latexdraw:position>
+                <latexdraw:x>221.0</latexdraw:x>
+                <latexdraw:y>132.0</latexdraw:y>
+            </latexdraw:position>
+        </latexdraw:metadata>
+    </metadata>
+</svg>

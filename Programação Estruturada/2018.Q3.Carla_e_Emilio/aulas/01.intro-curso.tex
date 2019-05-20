@@ -1,0 +1,224 @@
+%    Copyright © 2015
+%  Eduardo Candido Xavier <eduardo@ic.unicamp.br>
+%
+%  This work is free. You can redistribute it and/or modify it under the
+%  terms of the Do What The Fuck You Want To Public License, Version 2,
+%  as published by Sam Hocevar. See the COPYING file for more details.
+%
+%  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+%                   Version 2, December 2004
+%
+%   Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+%
+%   Everyone is permitted to copy and distribute verbatim or modified
+%   copies of this license document, and changing it is allowed as long
+%   as the name is changed.
+%
+%  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+%   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+%
+%      0. You just DO WHAT THE FUCK YOU WANT TO.
+
+\documentclass[handout]{beamer}
+\usetheme{metropolis}
+\beamertemplatetransparentcoveredhigh
+
+\usepackage[portuges]{babel}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{xpatch}
+\usepackage[outputdir=build]{minted}
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\makeatother
+\setminted[c]{
+  linenos=true,
+  breaklines=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small,
+}
+\setminted[bash]{
+  linenos=true,
+  encoding=utf8,
+  frame=lines,
+  framerule=0.5pt,
+  autogobble,
+  fontsize=\small
+}
+
+\newcommand{\cod}[1]{\mintinline{c}{#1}}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+\definecolor{Purple}{HTML}{911146}
+\definecolor{Orange}{HTML}{CF4A30}
+\setbeamercolor{alerted text}{fg=Orange}
+\setbeamercolor{frametitle}{bg=Purple}
+\setbeamercolor{block body}{bg=Purple!20,fg=black}
+\setbeamercolor{block title}{bg=Purple!50,fg=black}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+
+\newcommand{\setcoverbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/coverbg}}
+}
+\newcommand{\setsectionbg}{
+  \setbeamertemplate{background}
+  {\includegraphics[width=\paperwidth,height=\paperheight]{backgrounds/blank}}
+}
+
+\title{Programação Estruturada}
+\subtitle{Introdução ao curso}
+
+\author{Professores Emílio Francesquini e Carla Negri Lintzmayer}
+\institute{Centro de Matemática, Computação e Cognição\\ Universidade Federal do ABC}
+\date{2018.Q3}
+
+\begin{document}
+
+\setcoverbg
+\maketitle
+\setsectionbg
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{O que vamos aprender neste curso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{O que vamos aprender neste curso}
+
+    \begin{itemize}[<+->]
+        \item Como usar um computador para resolver problemas
+        \begin{enumerate}
+            \item Definiremos um problema a ser revolvido
+            \item Discutiremos uma solução para o problema
+            \item Descreveremos um \textbf{algoritmo} para resolver o problema
+            \begin{itemize}
+                \item Sequência \textbf{bem definida} de comandos e passos
+            \end{itemize}
+            \item \textbf{Implementaremos} este algoritmo e criaremos um \textbf{programa}
+            \begin{itemize}
+                \item Sequência de comandos e passos que um computador deve executar
+            \end{itemize}
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{O que vamos aprender neste curso}
+
+    \textbf{Problema:} Dado um número $x$, quais são os divisores de $x$?
+
+    \pause
+    \textbf{Discussão:} Os candidatos a serem divisores de $x$ só podem estar no conjunto $\{1,2,3,\ldots,x\}$.
+    Podemos testar cada um desses números e verificar se eles dividem $x$.
+
+    \pause
+    \textbf{Algoritmo:}
+    \begin{enumerate}
+        \item Para todos os números inteiros $r \in \{1,2,\ldots,x\}$:
+        \begin{enumerate}
+            \item Se o resto da divisão de $x$ por $r$ é zero, então $r$ é divisor de $x$
+        \end{enumerate}
+    \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{O que vamos aprender neste curso}
+
+    \textbf{Problema:} Dado um número $x$, quais são os divisores de $x$?
+
+    \textbf{Implementação:}
+    \begin{minted}{c}
+        #include <stdio.h>
+
+        int main() {
+            int x, i;
+            scanf("%d", &x); // lendo um numero do teclado
+            for (i = 1; i <= x; i++) {
+                if (x % i == 0)
+                    printf("%d\n", i); // imprimindo um divisor
+            }
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{O que vamos aprender neste curso}
+
+    \begin{itemize}[<+->]
+        \item Um algoritmo pode ser descrito de várias formas, como em português ou em uma \textbf{linguagem de programação}
+        \begin{itemize}
+            \item Conjunto de instruções e regras para gerar um programa de computador
+            \item Usadas para criar arquivos de texto comum: códigos-fonte
+        \end{itemize}
+        \item Aprenderemos a {\bf implementar} um algoritmo em linguagem \textbf{C}
+        \item A vantagem de se implementar um algoritmo em uma linguagem de programação é que podemos, a partir daí, criar um \textbf{programa} que usa o computador para resolver o problema
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Por que aprender algoritmos e programação?}
+
+    \begin{itemize}[<+->]
+        \item Atividade básica de qualquer bom computeiro
+        \item Para ser capaz de automatizar algum processo
+        \item Para criar ferramentas/protótipos, você deverá fazer simulações para a realização de testes preliminares
+        \item Para enxergar situações onde uma solução computacional pode trazer benefícios
+        \item Para testar hipóteses
+        \item Para resolver sistemas complexos de equações que não necessariamente podem ser resolvidos por softwares padrões (como MatLab)
+        \item Posso ter algum retorno financeiro com isso!
+        \item Porque é legal e desfiador!
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{O que será necessário}
+
+    \begin{itemize}[<+->]
+        \item Papel e caneta em todas as aulas
+        \item Acesso a um computador
+        \item Um {\bf editor de texto} simples (vim, emacs, gedit, kyle, etc.)
+        \item Um {\bf compilador}, que transforma o código escrito em C em um programa executável (gcc)
+        \item Capacidade para resolver problemas técnicos: como todo bom desenvolvedor, será muito importante você encontrar soluções para problemas técnicos
+        \begin{itemize}
+            \item Aprendam a usar o Google
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{O que será necessário}
+
+    Para ir bem neste curso:
+    \begin{itemize}[<+->]
+        \item Faça todos os laboratórios
+        \item Faça e implemente as listas de exercícios
+        \item E, finalmente, faça e implemente as listas de exercícios
+    \end{itemize}
+\end{frame}
+
+\end{document}
