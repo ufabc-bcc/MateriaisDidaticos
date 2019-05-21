@@ -1,0 +1,79 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: bt-br
+
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA025-13 - Sistemas Distribuídos - 2018.Q2
+#+AUTHOR:   Emilio Francesquini {{{CrLf}}} e.francesquini@ufabc.edu.br
+
+#+BEGIN_CENTER
+*Lista de Exercícios 5*[fn::Esta lista inclui exercícios retirados do livro [ST] e da página [[http://www.ic.unicamp.br/~bit/ensino/mc714_2s13/][(link)]]
+criada pelo Prof. Luiz Fernando Bittencourt para o curso de Sistemas
+Distribuídos da Unicamp.]
+#+END_CENTER
+
+1. Por que é interessante para um sistema distribuído possuir réplicas
+   de seus dados em mais de um nó?
+
+2. Descreva o que é um modelo de consistência e porque ele é
+   importante para o desenvolvimento de sistemas distribuídos.
+
+3. É recorrentemente afirmado que consistência fraca (/weak
+   consistency/) impõe um fardo mais pesado para os desenvolvedores
+   das aplicações. Até que ponto este tipo de afirmação é verdadeira?
+
+4. Explique o compromisso (/trade off/) entre manutenção de cópias
+   atualizadas e desempenho de replicação.
+
+5. Que tipo de modelo de consistência você utilizaria para o mercado
+   de ações. Justifique a sua resposta.
+
+6. Discuta em que situação manter consistência de dados a qualquer
+   custo com, por exemplo, sincronização de dados instantânea, não é
+   viável e pode desperdiçar recursos.
+
+7. Dê um exemplo de operações de escrita e leitura onde a consistência
+   causal é obedecida, mas a consistência sequencial não.
+
+8. Em un cenário de consistência diferida (/eventual consistency/), a
+   não atualização dos dados leva as cópias a tornarem-se idênticas. Explique.
+
+9. Suponha um item de dado $x$ que é incrementado com o tempo. Dê um
+   exemplo de situação onde, caso não seja utilizado um protocolo de
+   consistência adequado, um cliente poderia escrever um valor $x =
+   x + 1$ em item de dado $x$ e ler esse mesmo item de dado $x$ com
+   valor $x - 1$.
+
+10. Considere um cenário com quantidade de clientes fixa e com
+    posicionamento estático, onde tais clientes são geograficamente
+    dispersos.
+    a) Que tipo de replicação você utilizaria? Réplicas
+    permanentes, réplicas iniciadas por servidor, ou réplicas iniciadas
+    por clientes? Por que?
+    b) Descreva um processo de replicação que
+    determine uma boa posição para as réplicas.
+
+11. Considerando a consistência de dados centradas no cliente, discuta
+    a diferença e dê exemplos de aplicações para as quais os modelos de
+    consistência (i) leituras monotônicas, (ii) escritas monotônicas,
+    (iv) leia-suas-escritas e (v) escrita-segue-leituras seriam
+    adequados.
+
+12. Considerando a figura do slide 10 da Aula 14-15, seria correto
+    afirmar que a execução com a assinatura 001110 é válida?
+
+13. Quando utilizamos o mecanismo de /lease/ é essencial que nos
+    asseguremos que os relógios dos participantes estejam
+    sincronizados?
+
+14. Um arquivo é replicado em 10 servidores. Liste todas as
+    combinações de número de leitores e escritores utilizando o
+    protocolo de quorum de escrita replicada.
+
+15. Dê um exemplo de conflito de escritas no protocolo de escrita
+    replicada baseada em quorum em um sistema com pelo menos 15 nós.

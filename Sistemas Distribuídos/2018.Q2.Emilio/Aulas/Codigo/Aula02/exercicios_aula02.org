@@ -1,0 +1,123 @@
+#+TITLE:     SD 2018-Q2 - Prática
+#+AUTHOR:    Emilio Francesquini
+#+OPTIONS: validate:nil
+#+SUBTITLE: Prática Aula 02 - Calculadora Java RMI
+#+EMAIL:    e.francesquini@ufabc.edu.br
+#+LANGUAGE: es
+
+# General Utils
+# For export
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+# For use in other macros
+#+MACRO: newline src_emacs-lisp[:results raw]{"\n"}
+#+MACRO: org-version src_emacs-lisp[:results raw]{org-version}
+#+MACRO: emacs-version src_emacs-lisp[:results raw]{emacs-version}
+#+MACRO: my-footer ----- {{{newline}}}#+BEGIN_CENTER {{{newline}}} Última atualização: {{{time(%Y-%m-%d %H:%M)}}} {{{CrLf}}} Emacs {{{emacs-version}}} (Org-mode {{{org-version}}}) {{{newline}}}#+END_CENTER {{{newline}}}
+
+# See also https://github.com/fniessen/org-macros
+# Colors: HEX #RRGGBB or red, orange, yellow, green, blue, purple, violet
+#+MACRO: bgcolor @@html:<div style="background-color: $1;">$2</div>@@
+#+MACRO: color @@html:<span style="color: $1">$2</span>@@@@latex:\textcolor{$1}{$2}@@@@odt:<text:span text:style-name="$1">$2</text:span>@@
+#+MACRO: highlight @@html:<span style="background-color: $1;">$2</span>@@
+#+MACRO: hl {{{highlight(#FFFF00,$1)}}}
+
+# Block quoted texts
+#+MACRO: BlockIconBegin #+BEGIN_QUOTE {{{newline}}} [[./img/$1.png]] *$2* {{{newline}}} {{{CrLf}}}{{{CrLf}}}
+#+MACRO: BlockIconEnd #+END_QUOTE  {{{newline}}}
+
+
+#+MACRO: BlockIcon #+BEGIN_QUOTE {{{newline}}} [[./img/$1.png]] *$2* {{{newline}}} {{{CrLf}}}{{{CrLf}}} $3 {{{newline}}}#+END_QUOTE {{{newline}}}
+#+MACRO: BlockCaution {{{BlockIcon(caution,$1,$2)}}}
+#+MACRO: BlockImportant {{{BlockIcon(important,$1,$2)}}}
+#+MACRO: BlockNote {{{BlockIcon(note,$1,$2)}}}
+#+MACRO: BlockTip {{{BlockIcon(tip,$1,$2)}}}
+#+MACRO: BlockWarning {{{BlockIcon(warning,$1,$2)}}}
+
+# Export options
+
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120065132-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-120065132-1'); </script>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://professor.ufabc.edu.br/~e.francesquini/org/styles/org.css"/>
+#+HTML_HEAD: <link rel="icon" type="image/png" href="http://professor.ufabc.edu.br/~e.francesquini/img/icon.png">
+
+# Document options
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+
+#+BEGIN_abstract
+#+BEGIN_CENTER
+Segundo Quadrimestre de 2018  {{{CrLf}}}
+*Professor:* [[http://professor.ufabc.edu.br/~e.francesquini][{{{AUTHOR}}}]]{{{CrLf}}}
+*E-mail:* e.francesquini@ufabc.edu.br  {{{CrLf}}}
+#+END_CENTER
+#+END_abstract
+
+# To force TOC after the abstract o org.css. For readtheorg, no difference
+#+TOC: headlines 2
+
+{{{CrLf}}}
+
+O código abaixo implementa um simples servidor que faz as 4 operações
+aritméticas básicas utilizando Java RMI.
+
+- Você pode baixar o código completo aqui: [[./calculadora.zip][calculadora.zip]]
+- Uma descrição mais detalhada do código pode ser vista aqui: [[./pratica02.pdf][pratica02.pdf]]
+
+-----
+
+* Número
+
+Os tipos primitivos (assim como as classes Integer, Float, Double,
+...) já implementam ~java.io.Serializable~. Aqui colocamos nossa
+própria implementação para deixar claro o que é necessário fazer em um
+caso mais geral e mais complexo que um simples número.
+
+{{{CrLf}}}
+
+Download do ~.java~:
+
+- [[./Numero.java][Numero.java]]
+- [[./NumeroImpl.java][NumeroImpl.java]]
+
+** Numero.java
+#+INCLUDE: "./Numero.java" src java
+
+** NumeroImpl.java
+#+INCLUDE: "./NumeroImpl.java" src java
+
+-----
+
+* Calculadora
+
+Download do ~.java~:
+- [[./Calculadora.java][Calculadora.java]]
+- [[./CalculadoraImpl.java][CalculadoraImpl.java]]
+- [[./DivisaoPorZeroException.java][DivisaoPorZeroException.java]]
+
+** Calculadora.java
+#+INCLUDE: "./Calculadora.java" src java
+
+** CalculadoraImpl.java
+#+INCLUDE: "./CalculadoraImpl.java" src java
+
+** DivisaoPorZeroException.java
+#+INCLUDE: "./DivisaoPorZeroException.java" src java
+
+-----
+
+* Servidor
+
+Download do ~.java~ para o Servidor:
+- [[./ServidorCalculadora.java][ServidorCalculadora.java]]
+
+#+INCLUDE: "./ServidorCalculadora.java" src java
+
+-----
+
+* Cliente
+
+Download do ~.java~ para o Cliente:
+- [[./ClienteCalculadora.java][ClienteCalculadora.java]]
+
+#+INCLUDE: "./ClienteCalculadora.java" src java
+-----

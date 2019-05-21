@@ -1,0 +1,128 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: bt-br
+
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA025-13 - Sistemas Distribuídos - 2018.Q2
+#+AUTHOR:   Emilio Francesquini {{{CrLf}}} e.francesquini@ufabc.edu.br
+
+#+BEGIN_CENTER
+*Lista de Exercícios 4*[fn::Esta lista inclui exercícios retirados do livro [ST] e da página [[http://www.ic.unicamp.br/~bit/ensino/mc714_2s13/][(link)]]
+criada pelo Prof. Luiz Fernando Bittencourt para o curso de Sistemas
+Distribuídos da Unicamp.]
+#+END_CENTER
+
+1. Considere o comportamente de duas máquinas em um sistema
+   distribuído. Ambas têm relógios que supostamente têm 1000 /ticks/
+   por milissegundo. Uma delas é perfeita enquanto a outra apenas
+   provê 900 ticks por milissegundo. Se uma atualização de relógio
+   baseada em UTC é feita a cada minuto, qual é o deslocamento máximo
+   (/skew/) que pode ocorrer?
+
+2. Utilizando o diagrama abaixo, explique como A pode estimar o
+   deslocamento de seu relógio em relação a B. [[./sync.png]]
+
+3. Quando um nó sincroniza o seu relógio com outro nó é normalmente
+   uma boa prática levar em consideração as medidas anteriores. Por
+   quê? Dê um exemplo de como essas medidas anteriores poderiam ser
+   levadas em consideração.
+
+4. Suponha que na figura anterior não podemos supor que $dT_{req} \approx
+   dT{res}$. Como isso afeta a precisão de estimativa de A?
+
+5. Dê uma solução simples para sincronização de relógios em sistemas
+   distribuídos de área pequena.
+
+6. Explique a relação "acontece antes" (/happens before/) e o que ela
+   significa no contexto de relógios lógicos.
+
+7. Explique como funcionam as marcas de tempo de Lamport e o que elas
+   permitem.
+
+8. Considere um grupo de três processos que se comunicam usando marcas
+   de tempo vetoriais. Se o processo P1 recebe uma mensagem m com
+   marcas de tempo [3, 2, 4] do processo P3, o que isso significa?
+   Quando P1 entregará m se for necessário manter causalidade?
+
+9. Considere um sistema que mantém relógios vetoriais para impor
+   comunicação causal. Seja $ts(m)$ a marca do tempo (vetorial)
+   enviado com a mensagem $m$, e $VC_i$ o relógio vetorial do processo
+   $i$. Uma mensagem do processo $i$ é entregue ao processo $j$
+   somente se (1) $ts(m)[i] = VC_j [i] + 1$ e (2) $ts(m)[k] \leq
+   VC_j[k]~\forall~k \neq i$. Qual a interpretação para essas duas
+   condições?
+
+10. Marcas de tempo vetoriais podem ser utilizadas para capturar
+    causalidade potencial. Preencha os relógios vetoriais na figura
+    abaixo e explique por que a entrega da mensagem m∗ ao processo P2 é
+    atrasada. [[./vclock.png]]
+
+11. Discuta a diferença entre oferecer entrega de mensagem ordenada por
+    causalidade como suporte do middleware ou diretamente pela aplicação.
+
+12. Explique a diferença entre multicast totalmente ordenado e ordenado por causalidade.
+
+13. Considere um cliente tentando sincronizar seu relógio com o do
+    servidor uma vez por minuto. Eleenvia um número de requisições,
+    obtendo os resultados abaixo. Como o cliente ajusta seu relógio
+    após receber a resposta? Tempo dado em (hr:min:seg:mseg). Tempo de
+    processamento no servidor é zero.{{{CrLf}}}
+=Enviado em (hora local)= {{{CrLf}}}
+=10:54:00:00 10:55:00:00 10:56:00:00= {{{CrLf}}}
+=Atraso de ida e volta= {{{CrLf}}}
+=18 ms 24 ms 22 ms= {{{CrLf}}}
+=Resposta= {{{CrLf}}}
+=10:54:00:10 10:55:00:12 10:55:00:10=
+
+14. [@14] Marcas de tempo de Lamport não capturam causalidade. Explique.
+15. Qual a relação entre um relógio físico e um relógio lógico?
+
+16. Explique o que entende-se por multicast ordenado por causalidade.
+
+17. Explique o algoritmo distribuído de exclusão mútua (Ricart e Agrawala).
+
+18. O algoritmo de Ricart e Agrawala apresenta o problema de que
+    quando um processo cai e não responde a uma requisição de acessa a
+    recurso, a falta de resposta é interpretada como negação de
+    permissão de acesso. Sugerimos que todas as requisições sejam
+    respondidas imediatamente para facilitar a detecção de processos
+    que caíram. Há circunstâncias onde esse método é insuficiente?
+    Discuta.
+
+19. Um sistema distribuído pode ter múltiplos recursos
+    independentes. Suponha que o processo 0 deseja acessar o recurso A
+    e o processo 1 deseja acessar o recurso B. É possível que o
+    algoritmo de Ricart e Agrawala cause impasses (/deadlocks/)?
+    Explique.
+
+20. Compare os algoritmos de exclusão mútua Centralizado,
+    Descentralizado, Distribuído, e Token Ring em termos de desempenho
+    e problemas existentes.
+
+21. O algoritmo de Ricart e Agrawala para exclusão mútua entre N
+    processos introduz N pontos de falha. Explique.
+
+22. Explique o objetivo de um algoritmo de eleição de líder em
+    sistemas distribuídos.
+
+23. Suponha que dois processos detectem a morte do coordenador
+    simultaneamente e ambos decidam convocar uma eleição que utilize o
+    algoritmo do valentão. O que acontecerá?
+
+24. Há duas mensagens de eleição (eleição baseada em anel) circulando
+    simultaneamente na figura abaixo. Isso acarreta em problemas?
+    Proponha uma solução para eliminar uma das mensagens sem afetar o
+    algoritmo. [[./eleicao.png]]
+
+25. Dê três exemplos (excluindo-se o uso para transferência de valores
+    monetários) onde a tecnologia /blockchain/ utilizada pelo BitCoin
+    pode ser usada.
+
+26. Explique o que são os /pools/ de mineração de BitCoins. Explique a
+    sua arquitetura (lógica, no contexto de sistemas distribuídos) e o
+    porque eles são úteis aos usuários da rede.

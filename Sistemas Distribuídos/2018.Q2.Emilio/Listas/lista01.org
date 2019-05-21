@@ -1,0 +1,119 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: bt-br
+
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA025-13 - Sistemas Distribuídos - 2018.Q2
+#+SUBTITLE: --- {{{CrLf}}} *Lista de Exercícios 1* {{{CrLf}}} ---
+#+AUTHOR:   Emilio Francesquini {{{CrLf}}} e.francesquini@ufabc.edu.br
+
+1. [CDKB] Um usuário chega a uma estação de trem com o seu celular que é
+   equipado com Bluetooth. Descreva como funcionaria um sistema onde o
+   usuário poderia ser informado automaticamente sobre os serviços e
+   instalações da estação sem ter que manualmente informar ao
+   dispositivo o nome da estação, por exemplo.
+
+2. [ST] O que é um /middleware/? Qual é o seu papel em um sistema
+   distribuído?
+
+3. [ST] Explique o significado de "transparência de distribuição" e dê
+   exemplos de diferentes tipos de transparência.
+
+4. [CDKB] Use a /World Wide Web/ como exemplo para discutir os seguintes pontos
+   - Compartilhamento de recursos
+   - Cliente/Servidor
+   - URL
+
+5. [ST] Por que as vezes é muito difícil ocultar a presença de falhas
+   em um sistema distribuído?
+
+6. [ST] Por que pode não ser uma boa ideia implementar o maior grau de
+   transparência (de distribuição) possível em um sistema distribuído?
+
+7. [ST] Descreva as características de sistema distribuído
+   aberto. Quais são as suas vantagens?
+
+8. [ST] O que é um sistema escalável (/scalable/)? Qual a diferença de
+   técnicas escalabilidade vertical e horizontal? Quando cada um delas
+   (ou ambas) devem ser aplicadas?
+
+9. [ST] Sistemas com suporte a transações distribuídas prometem
+   garantir as propriedades ACID. Que propriedades são essas?
+
+10. [ST] Quando uma transação distribuída é abortada, todas as
+    modificações feitas devem ser revertidas, ou seja, o sistema como
+    um todo deve voltar ao estado anterior. Há contudo casos onde isto
+    não é possível. Dê um exemplo e explique o porquê.
+
+11. [ST] Se um cliente e um servidor estiverem muito distantes
+    (geograficamente), pode ser que haja uma latência muito alta para
+    comunicação entre eles. O que você propõe para resolver este
+    problema?
+
+12. [ST] O que uma arquitetura cliente-servidor de 3 camadas? Dê um
+    exemplo.
+
+13. [ST] Considere uma cadeia de processos $P_1,P_2,\ldots P_n$ que
+    implementam uma arquitetura cliente-servidor multicamadas. O
+    processo $P_i$ é cliente do processo $P_{i+1}$ e vai devolver uma
+    resposta para o cliente $P_{i-1} apenas quando receber a resposta
+    do $P_{i+1}$. Quais são os principais problemas em organizar um
+    sistema distribuído desta maneira? Qual é o tempo de resposta de
+    uma requisição feita à $P_1$.
+
+14. [CDKB] Participantes de uma rede /peer-to-peer/ são tipicamente
+    computadores domésticos presentes em domicílios ou
+    escritórios. Quais são as implicações desta organização para os
+    dados armazenados na rede com relação à:
+    - Segurança dos dados armazenados na rede
+    - Disponibilidade
+    - Replicação
+
+15. [ST] Numa rede de sobreposição (/overlay network/) estruturada as
+    mensagens são roteadas de acordo com a topologia da rede de
+    sobreposição. Quais são as desvantagens e vantagens deste tipo de
+    abordagem?
+
+16. [ST] Considere uma rede de sobreposição não estruturada na qual
+    cada nó se conecta de maneira aleatória a $c$ vizinhos. Se $P$ e
+    $Q$ são vizinhos de $R$, qual é a probabilidade que $P$ e $Q$
+    também sejam vizinhos entre si?
+
+17. [ST] Considere novamente uma rede de sobreposição não estruturada
+    onde cada nó se conecta aleatoriamente a $c$ vizinhos. Para buscar
+    um arquivo, por exemplo, cada nó envia uma mensagem a cada um dos
+    seus vizinhos que por sua vez enviam essa mensagem aos seus
+    vizinhos uma vez mais. Quantos nós serão alcançados por uma busca?
+
+18. [ST] Descreva o papel de um /superpeer/ em uma rede de
+    sobreposição não estruturada. Quais as características que podem
+    impedir um nó de se tornar um superpeer? Como isto se encaixa em
+    aplicações como o Skype por exemplo?
+
+19. [ST] Dê pelo menos 2 exemplos de uso de /interceptors/ em
+    aplicações reais. Quais alternativas existiriam para implementar as
+    mesmas funcionalidades sem utilizar /interceptors/? Quais as
+    vantagens e desvantagens?
+
+20. [ST] Até qual ponto os /interceptors/ são dependentes da
+    tecnologia de /middleware/ sobre as quais eles são implementados?
+
+21. [ST] Carros modernos são cheios de componentes eletrônicos que
+    medem desde a temperatura do motor até se o motorista está com
+    sono. Dê dois exemplos sistemas presentes em carros modernos que
+    são regulados por /feedback/.
+
+22. [ST] Dê um exemplo de sistema autogerenciável no qual o componente
+    de análise é completamente distribuído (ou até mesmo oculto).
+
+23. [CDKB] Discorra sobre a diferença de /buffering/ e /caching/.
+
+24. [CDKB] O /Network Time Protocol/ é utilizado para sincronizar
+    relógios de computadores pela rede. Explique (intuitivamente)
+    porque, mesmo com este protocolo, é impossível garantir que dois
+    relógios estejam perfeitamente sincronizados.

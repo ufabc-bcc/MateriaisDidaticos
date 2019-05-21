@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2018-06-14 Thu 17:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SD 2018-Q2 - Prática</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Emilio Francesquini" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120065132-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-120065132-1'); </script>
+<link rel="stylesheet" type="text/css" href="http://professor.ufabc.edu.br/~e.francesquini/org/styles/org.css"/>
+<link rel="icon" type="image/png" href="http://professor.ufabc.edu.br/~e.francesquini/img/icon.png">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">SD 2018-Q2 - Prática
+<br />
+<span class="subtitle">Correção Exercícios - Prática Aula 01</span>
+</h1>
+<div class="abstract">
+<div class="org-center">
+<p>
+Segundo Quadrimestre de 2018   <br> 
+<b>Professor:</b> <a href="http://professor.ufabc.edu.br/~e.francesquini">Emilio Francesquini</a> <br> 
+<b>E-mail:</b> e.francesquini@ufabc.edu.br   <br> 
+</p>
+</div>
+
+</div>
+
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge8c483e">Exercício 1</a>
+<ul>
+<li><a href="#orgbaf15a5">Cliente</a></li>
+<li><a href="#org78425df">Servidor</a></li>
+</ul>
+</li>
+<li><a href="#orgab6e4ea">Exercício 2</a>
+<ul>
+<li><a href="#org51e54b6">Cliente</a></li>
+<li><a href="#org0615f9a">Servidor</a></li>
+</ul>
+</li>
+<li><a href="#org31c9f46">Exercício 3</a>
+<ul>
+<li><a href="#org531c560">Cliente</a></li>
+<li><a href="#org676f1d8">Servidor</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge8c483e" class="outline-2">
+<h2 id="orge8c483e">Exercício 1</h2>
+<div class="outline-text-2" id="text-orge8c483e">
+<ul class="org-ul">
+<li>Utiliza TCP/IP - Orientado a conexão</li>
+<li>Um único cliente por servidor</li>
+<li>Desperdiça CPU pois fica num laço de espera ocupada</li>
+</ul>
+
+<p>
+Download do <code>.java</code> para o Servidor e para o Cliente:
+</p>
+<ul class="org-ul">
+<li><a href="./Aula01_Ex01_Cliente.java">Cliente</a></li>
+<li><a href="./Aula01_Ex01_Servidor.java">Servidor</a></li>
+</ul>
+</div>
+
+<div id="outline-container-orgbaf15a5" class="outline-3">
+<h3 id="orgbaf15a5">Cliente</h3>
+<div class="outline-text-3" id="text-orgbaf15a5">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">net</span>.*;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Aula01_Ex01_Cliente</span> <span style="color: #707183;">{</span>
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #7388d6;">(</span><span style="color: #228b22;">String</span><span style="color: #909183;">[]</span> <span style="color: #a0522d;">args</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>args.length != 2<span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span>
+                <span style="color: #8b2252;">"Forma de uso: java Aula01_Ex01_Cliente &lt;end. servidor&gt; &lt;porta&gt;"</span><span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">hostName</span> = args<span style="color: #909183;">[</span>0<span style="color: #909183;">]</span>;
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">portNumber</span> = Integer.parseInt<span style="color: #909183;">(</span>args<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span><span style="color: #909183;">)</span>;
+
+        <span style="color: #a020f0;">try</span> <span style="color: #909183;">(</span>
+            <span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">socket</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Socket</span><span style="color: #709870;">(</span>hostName, portNumber<span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">PrintWriter</span> <span style="color: #a0522d;">socketOut</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">PrintWriter</span><span style="color: #709870;">(</span>socket.getOutputStream<span style="color: #907373;">()</span>, <span style="color: #008b8b;">true</span><span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">socketIn</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span>
+                    <span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>socket.getInputStream<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">stdIn</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span>
+                    <span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>System.in<span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+        <span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">while</span> <span style="color: #709870;">(</span><span style="color: #008b8b;">true</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span>stdIn.ready<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">userInput</span> = stdIn.readLine<span style="color: #6276ba;">()</span>;
+                    socketOut.println<span style="color: #6276ba;">(</span>userInput<span style="color: #6276ba;">)</span>;
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span><span style="color: #8b2252;">"SAIR"</span>.equals<span style="color: #858580;">(</span>userInput<span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+                        <span style="color: #a020f0;">break</span>;
+                <span style="color: #907373;">}</span>
+                <span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span>socketIn.ready<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">msg</span> = socketIn.readLine<span style="color: #6276ba;">()</span>;
+                    System.out.println<span style="color: #6276ba;">(</span><span style="color: #8b2252;">"&gt;"</span> + msg<span style="color: #6276ba;">)</span>;
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span><span style="color: #8b2252;">"SAIR"</span>.equals<span style="color: #858580;">(</span>msg<span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+                        <span style="color: #a020f0;">break</span>;
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">UnknownHostException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Endere&#231;o desconhecido "</span> + hostName<span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Erro conectanto em: "</span> +
+                hostName<span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org78425df" class="outline-3">
+<h3 id="org78425df">Servidor</h3>
+<div class="outline-text-3" id="text-org78425df">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">net</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Aula01_Ex01_Servidor</span> <span style="color: #707183;">{</span>
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #7388d6;">(</span><span style="color: #228b22;">String</span><span style="color: #909183;">[]</span> <span style="color: #a0522d;">args</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>args.length != 1<span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Forma de uso: java Aula01_Ex01_Servidor &lt;porta&gt;"</span><span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">portNumber</span> = Integer.parseInt<span style="color: #909183;">(</span>args<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span><span style="color: #909183;">)</span>;
+
+        <span style="color: #a020f0;">try</span> <span style="color: #909183;">(</span>
+            <span style="color: #228b22;">ServerSocket</span> <span style="color: #a0522d;">serverSocket</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ServerSocket</span><span style="color: #709870;">(</span>Integer.parseInt<span style="color: #907373;">(</span>args<span style="color: #6276ba;">[</span>0<span style="color: #6276ba;">]</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">clientSocket</span> = serverSocket.accept<span style="color: #709870;">()</span>;
+            <span style="color: #228b22;">PrintWriter</span> <span style="color: #a0522d;">clientOut</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">PrintWriter</span><span style="color: #709870;">(</span>clientSocket.getOutputStream<span style="color: #907373;">()</span>, <span style="color: #008b8b;">true</span><span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">clientIn</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span>
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>clientSocket.getInputStream<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">stdIn</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span><span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>System.in<span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+        <span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">while</span> <span style="color: #709870;">(</span><span style="color: #008b8b;">true</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span>stdIn.ready<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">userInput</span> = stdIn.readLine<span style="color: #6276ba;">()</span>;
+                    clientOut.println<span style="color: #6276ba;">(</span>userInput<span style="color: #6276ba;">)</span>;
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span><span style="color: #8b2252;">"SAIR"</span>.equals<span style="color: #858580;">(</span>userInput<span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+                        <span style="color: #a020f0;">break</span>;
+                <span style="color: #907373;">}</span>
+                <span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span>clientIn.ready<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">msg</span> = clientIn.readLine<span style="color: #6276ba;">()</span>;
+                    System.out.println<span style="color: #6276ba;">(</span><span style="color: #8b2252;">"&gt;"</span> + msg<span style="color: #6276ba;">)</span>;
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span><span style="color: #8b2252;">"SAIR"</span>.equals<span style="color: #858580;">(</span>msg<span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+                        <span style="color: #a020f0;">break</span>;
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.out.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Ocorreu um erro ao tentar escutar na porta "</span>
+                + portNumber<span style="color: #709870;">)</span>;
+            System.out.println<span style="color: #709870;">(</span>e.getMessage<span style="color: #907373;">()</span><span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgab6e4ea" class="outline-2">
+<h2 id="orgab6e4ea">Exercício 2</h2>
+<div class="outline-text-2" id="text-orgab6e4ea">
+<ul class="org-ul">
+<li>Utiliza TCP/IP - Orientado a conexão</li>
+<li>Aceita conexão de mais de um cliente por servidor</li>
+<li>Não desperdiça CPU pois emprega threads para evitar um laço de espera ocupada</li>
+</ul>
+
+<p>
+Download do <code>.java</code> para o Servidor e para o Cliente:
+</p>
+<ul class="org-ul">
+<li><a href="./Aula01_Ex02_Cliente.java">Cliente</a></li>
+<li><a href="./Aula01_Ex02_Servidor.java">Servidor</a></li>
+</ul>
+</div>
+
+<div id="outline-container-org51e54b6" class="outline-3">
+<h3 id="org51e54b6">Cliente</h3>
+<div class="outline-text-3" id="text-org51e54b6">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">net</span>.*;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Aula01_Ex02_Cliente</span> <span style="color: #707183;">{</span>
+
+    <span style="color: #a020f0;">static</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ConexaoServidor</span> <span style="color: #a020f0;">implements</span> <span style="color: #228b22;">Runnable</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">socket</span>;
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">PrintWriter</span> <span style="color: #a0522d;">socketOut</span>;
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">socketIn</span>;
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">String</span> <span style="color: #a0522d;">nick</span>;
+
+        <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">ConexaoServidor</span> <span style="color: #909183;">(</span><span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">socket</span>, <span style="color: #228b22;">String</span> <span style="color: #a0522d;">nick</span><span style="color: #909183;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">this</span>.socket = socket;
+            <span style="color: #a020f0;">this</span>.nick = nick;
+            socketOut =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">PrintWriter</span><span style="color: #709870;">(</span>socket.getOutputStream<span style="color: #907373;">()</span>, <span style="color: #008b8b;">true</span><span style="color: #709870;">)</span>;
+            socketIn = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span>
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>socket.getInputStream<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">enviaMensagem</span><span style="color: #909183;">(</span><span style="color: #228b22;">String</span> <span style="color: #a0522d;">msg</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            socketOut.println<span style="color: #709870;">(</span>nick + <span style="color: #8b2252;">"&gt; "</span> +  msg<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">run</span> <span style="color: #909183;">()</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">try</span><span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">while</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">true</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">msg</span> = socketIn.readLine<span style="color: #6276ba;">()</span>;
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span>msg == <span style="color: #008b8b;">null</span><span style="color: #6276ba;">)</span> <span style="color: #6276ba;">{</span>
+                        System.out.println<span style="color: #858580;">(</span><span style="color: #8b2252;">"Conex&#227;o perdida."</span><span style="color: #858580;">)</span>;
+                        System.exit<span style="color: #858580;">(</span>1<span style="color: #858580;">)</span>;
+                    <span style="color: #6276ba;">}</span>
+                    System.out.println<span style="color: #6276ba;">(</span>msg<span style="color: #6276ba;">)</span>;
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #709870;">(</span><span style="color: #228b22;">Exception</span> <span style="color: #a0522d;">e</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                System.out.println<span style="color: #907373;">(</span>e.getMessage<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span>;
+            <span style="color: #709870;">}</span> <span style="color: #a020f0;">finally</span> <span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">try</span> <span style="color: #907373;">{</span>
+                    socketIn.close<span style="color: #6276ba;">()</span>;
+                    socketOut.close<span style="color: #6276ba;">()</span>;
+                    socket.close<span style="color: #6276ba;">()</span>;
+                <span style="color: #907373;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #907373;">(</span><span style="color: #228b22;">Exception</span> <span style="color: #a0522d;">e</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #b22222;">//</span><span style="color: #b22222;">j&#225; n&#227;o ha mais o que se fazer</span>
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #7388d6;">(</span><span style="color: #228b22;">String</span><span style="color: #909183;">[]</span> <span style="color: #a0522d;">args</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>args.length != 3<span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span>
+                <span style="color: #8b2252;">"Forma de uso: java Aula01_Ex02_Cliente &lt;end. servidor&gt; &lt;porta&gt; &lt;nick&gt;"</span><span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">hostName</span> = args<span style="color: #909183;">[</span>0<span style="color: #909183;">]</span>;
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">portNumber</span> = Integer.parseInt<span style="color: #909183;">(</span>args<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span><span style="color: #909183;">)</span>;
+        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">nick</span> = args<span style="color: #909183;">[</span>2<span style="color: #909183;">]</span>;
+
+        <span style="color: #a020f0;">try</span> <span style="color: #909183;">(</span>
+             <span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">socket</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Socket</span><span style="color: #709870;">(</span>hostName, portNumber<span style="color: #709870;">)</span>;
+             <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">stdIn</span> =
+             <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span><span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>System.in<span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+             <span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            <span style="color: #228b22;">ConexaoServidor</span> <span style="color: #a0522d;">conexaoServidor</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ConexaoServidor</span><span style="color: #709870;">(</span>socket, nick<span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">Thread</span> <span style="color: #a0522d;">th</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Thread</span> <span style="color: #709870;">(</span>conexaoServidor<span style="color: #709870;">)</span>;
+            th.setDaemon<span style="color: #709870;">(</span><span style="color: #008b8b;">true</span><span style="color: #709870;">)</span>;
+            th.start<span style="color: #709870;">()</span>;
+            <span style="color: #228b22;">String</span> <span style="color: #a0522d;">userInput</span>;
+            <span style="color: #a020f0;">while</span> <span style="color: #709870;">(</span><span style="color: #907373;">(</span>userInput = stdIn.readLine<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span> != <span style="color: #008b8b;">null</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span><span style="color: #8b2252;">"SAIR"</span>.equals<span style="color: #6276ba;">(</span>userInput<span style="color: #6276ba;">)</span><span style="color: #907373;">)</span> <span style="color: #a020f0;">break</span>;
+                conexaoServidor.enviaMensagem<span style="color: #907373;">(</span>userInput<span style="color: #907373;">)</span>;
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">UnknownHostException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Endere&#231;o desconhecido "</span> + hostName<span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Erro conectanto em: "</span> + hostName<span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0615f9a" class="outline-3">
+<h3 id="org0615f9a">Servidor</h3>
+<div class="outline-text-3" id="text-org0615f9a">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">net</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #228b22;">Set</span>;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.<span style="color: #008b8b;">concurrent</span>.<span style="color: #228b22;">ConcurrentHashMap</span>;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Aula01_Ex02_Servidor</span> <span style="color: #707183;">{</span>
+
+    <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Set</span><span style="color: #7388d6;">&lt;</span><span style="color: #228b22;">ConexaoCliente</span><span style="color: #7388d6;">&gt;</span> <span style="color: #a0522d;">clientes</span> = ConcurrentHashMap.newKeySet<span style="color: #7388d6;">()</span>;
+
+    <span style="color: #a020f0;">static</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ConexaoCliente</span> <span style="color: #a020f0;">implements</span> <span style="color: #228b22;">Runnable</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">socket</span>;
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">PrintWriter</span> <span style="color: #a0522d;">clientOut</span>;
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">clientIn</span>;
+
+        <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">ConexaoCliente</span> <span style="color: #909183;">(</span><span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">clientSocket</span><span style="color: #909183;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #909183;">{</span>
+            socket = clientSocket;
+            clientOut =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">PrintWriter</span><span style="color: #709870;">(</span>clientSocket.getOutputStream<span style="color: #907373;">()</span>, <span style="color: #008b8b;">true</span><span style="color: #709870;">)</span>;
+            clientIn = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span>
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>clientSocket.getInputStream<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>;
+            clientes.add<span style="color: #709870;">(</span><span style="color: #a020f0;">this</span><span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">enviaMensagem</span><span style="color: #909183;">(</span><span style="color: #228b22;">String</span> <span style="color: #a0522d;">msg</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            clientOut.println<span style="color: #709870;">(</span>msg<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">run</span> <span style="color: #909183;">()</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">try</span><span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">while</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">true</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">String</span> <span style="color: #a0522d;">msg</span> = clientIn.readLine<span style="color: #6276ba;">()</span>;
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span>msg == <span style="color: #008b8b;">null</span> || msg.endsWith<span style="color: #858580;">(</span><span style="color: #8b2252;">"SAIR"</span><span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+                        <span style="color: #a020f0;">break</span>;
+                    <span style="color: #a020f0;">for</span> <span style="color: #6276ba;">(</span><span style="color: #228b22;">ConexaoCliente</span> <span style="color: #a0522d;">conexao</span> : clientes<span style="color: #6276ba;">)</span> <span style="color: #6276ba;">{</span>
+                        <span style="color: #a020f0;">if</span> <span style="color: #858580;">(</span>conexao == <span style="color: #a020f0;">this</span><span style="color: #858580;">)</span> <span style="color: #a020f0;">continue</span>;
+                        conexao.enviaMensagem<span style="color: #858580;">(</span>msg<span style="color: #858580;">)</span>;
+                    <span style="color: #6276ba;">}</span>
+                    System.out.println<span style="color: #6276ba;">(</span>msg<span style="color: #6276ba;">)</span>;
+
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #709870;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                System.out.println<span style="color: #907373;">(</span><span style="color: #8b2252;">"&gt; Ocorreu um erro com uma conex&#227;o:"</span>
+                    + e.getMessage<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span>;
+            <span style="color: #709870;">}</span> <span style="color: #a020f0;">finally</span><span style="color: #709870;">{</span>
+                clientes.remove<span style="color: #907373;">(</span><span style="color: #a020f0;">this</span><span style="color: #907373;">)</span>;
+                System.out.println<span style="color: #907373;">(</span><span style="color: #8b2252;">"&gt; Cliente desconectado. Conex&#245;es ativas: "</span>
+                    + clientes.size<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span>;
+                <span style="color: #a020f0;">try</span><span style="color: #907373;">{</span>clientIn.close<span style="color: #6276ba;">()</span>;
+                clientOut.close<span style="color: #6276ba;">()</span>;
+                socket.close<span style="color: #6276ba;">()</span>;<span style="color: #907373;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #907373;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    System.out.println<span style="color: #6276ba;">(</span><span style="color: #8b2252;">"&gt; Ocorreu um erro tentando fechar a conex&#227;o:"</span>
+                        + e.getMessage<span style="color: #858580;">()</span><span style="color: #6276ba;">)</span>;
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #7388d6;">(</span><span style="color: #228b22;">String</span><span style="color: #909183;">[]</span> <span style="color: #a0522d;">args</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>args.length != 1<span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Forma de uso: java Aula01_Ex02_Servidor &lt;porta&gt;"</span><span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">portNumber</span> = Integer.parseInt<span style="color: #909183;">(</span>args<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span><span style="color: #909183;">)</span>;
+
+        <span style="color: #228b22;">ServerSocket</span> <span style="color: #a0522d;">serverSocket</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ServerSocket</span><span style="color: #909183;">(</span>Integer.parseInt<span style="color: #709870;">(</span>args<span style="color: #907373;">[</span>0<span style="color: #907373;">]</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>;
+        <span style="color: #a020f0;">while</span> <span style="color: #909183;">(</span><span style="color: #008b8b;">true</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.out.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"&gt; Esperando usu&#225;rios. Conex&#245;es ativas: "</span> + clientes.size<span style="color: #907373;">()</span><span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">Socket</span> <span style="color: #a0522d;">clientSocket</span> = serverSocket.accept<span style="color: #709870;">()</span>;
+            <span style="color: #228b22;">ConexaoCliente</span> <span style="color: #a0522d;">cliente</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ConexaoCliente</span><span style="color: #709870;">(</span>clientSocket<span style="color: #709870;">)</span>;
+            <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Thread</span><span style="color: #709870;">(</span>cliente<span style="color: #709870;">)</span>.start<span style="color: #709870;">()</span>;
+            System.out.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"&gt; Recebida uma conex&#227;o."</span><span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-org31c9f46" class="outline-2">
+<h2 id="org31c9f46">Exercício 3</h2>
+<div class="outline-text-2" id="text-org31c9f46">
+<ul class="org-ul">
+<li>Utiliza UDP/IP - Orientado a datagramas</li>
+<li>Ao contrário do exercício 2, não é capaz de manter facilmente uma contagem dos clientes conectados
+<ul class="org-ul">
+<li>Para isto seria necessário implementar um sistema de verificação
+(essencialmente o que o TCP/IP faz)</li>
+<li>Como este código não implementa o sistema acima, a lista dos
+clientes conectados nunca é limpa. Em um sistema real essa lista
+cresceria até o limite da memória</li>
+</ul></li>
+</ul>
+
+<p>
+Download do <code>.java</code> para o Servidor e para o Cliente:
+</p>
+<ul class="org-ul">
+<li><a href="./Aula01_Ex03_Cliente.java">Cliente</a></li>
+<li><a href="./Aula01_Ex03_Servidor.java">Servidor</a></li>
+</ul>
+</div>
+
+<div id="outline-container-org531c560" class="outline-3">
+<h3 id="org531c560">Cliente</h3>
+<div class="outline-text-3" id="text-org531c560">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">net</span>.*;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Aula01_Ex03_Cliente</span> <span style="color: #707183;">{</span>
+
+    <span style="color: #a020f0;">static</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ConexaoServidor</span> <span style="color: #a020f0;">implements</span> <span style="color: #228b22;">Runnable</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">private</span> <span style="color: #a020f0;">final</span> <span style="color: #228b22;">DatagramSocket</span> <span style="color: #a0522d;">socket</span>;
+
+        <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">ConexaoServidor</span> <span style="color: #909183;">(</span><span style="color: #228b22;">DatagramSocket</span> <span style="color: #a0522d;">socket</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">this</span>.socket = socket;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">run</span> <span style="color: #909183;">()</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">try</span><span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">while</span> <span style="color: #907373;">(</span><span style="color: #008b8b;">true</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #228b22;">DatagramPacket</span> <span style="color: #a0522d;">resposta</span> =
+                        <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DatagramPacket</span> <span style="color: #6276ba;">(</span><span style="color: #a020f0;">new</span> <span style="color: #228b22;">byte</span><span style="color: #858580;">[</span>512<span style="color: #858580;">]</span>, 512<span style="color: #6276ba;">)</span>;
+                    socket.receive <span style="color: #6276ba;">(</span>resposta<span style="color: #6276ba;">)</span>;
+                    System.out.println <span style="color: #6276ba;">(</span><span style="color: #a020f0;">new</span> <span style="color: #228b22;">String</span><span style="color: #858580;">(</span>resposta.getData<span style="color: #80a880;">()</span><span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>;
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #709870;">(</span><span style="color: #228b22;">Exception</span> <span style="color: #a0522d;">e</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                System.out.println<span style="color: #907373;">(</span>e.getMessage<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span>;
+            <span style="color: #709870;">}</span> <span style="color: #a020f0;">finally</span> <span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">try</span> <span style="color: #907373;">{</span>
+                    socket.close<span style="color: #6276ba;">()</span>;
+                <span style="color: #907373;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #907373;">(</span><span style="color: #228b22;">Exception</span> <span style="color: #a0522d;">e</span><span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #b22222;">//</span><span style="color: #b22222;">j&#225; n&#227;o ha mais o que se fazer</span>
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #7388d6;">(</span><span style="color: #228b22;">String</span><span style="color: #909183;">[]</span> <span style="color: #a0522d;">args</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>args.length != 3<span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span>
+                <span style="color: #8b2252;">"Forma de uso: java Aula01_Ex03_Cliente &lt;end. servidor&gt; &lt;porta&gt; &lt;nick&gt;"</span><span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">hostName</span> = args<span style="color: #909183;">[</span>0<span style="color: #909183;">]</span>;
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">porta</span> = Integer.parseInt<span style="color: #909183;">(</span>args<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span><span style="color: #909183;">)</span>;
+        <span style="color: #228b22;">String</span> <span style="color: #a0522d;">nick</span> = args<span style="color: #909183;">[</span>2<span style="color: #909183;">]</span>;
+
+        <span style="color: #a020f0;">try</span> <span style="color: #909183;">(</span>
+             <span style="color: #228b22;">DatagramSocket</span> <span style="color: #a0522d;">socket</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DatagramSocket</span><span style="color: #709870;">()</span>;
+             <span style="color: #228b22;">BufferedReader</span> <span style="color: #a0522d;">stdIn</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">BufferedReader</span><span style="color: #709870;">(</span>
+                 <span style="color: #a020f0;">new</span> <span style="color: #228b22;">InputStreamReader</span><span style="color: #907373;">(</span>System.in<span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+             <span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            <span style="color: #228b22;">InetAddress</span> <span style="color: #a0522d;">addr</span> = InetAddress.getByName<span style="color: #709870;">(</span>hostName<span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">ConexaoServidor</span> <span style="color: #a0522d;">conexaoServidor</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">ConexaoServidor</span><span style="color: #709870;">(</span>socket<span style="color: #709870;">)</span>;
+            <span style="color: #228b22;">Thread</span> <span style="color: #a0522d;">th</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Thread</span> <span style="color: #709870;">(</span>conexaoServidor<span style="color: #709870;">)</span>;
+            th.setDaemon<span style="color: #709870;">(</span><span style="color: #008b8b;">true</span><span style="color: #709870;">)</span>;
+            th.start<span style="color: #709870;">()</span>;
+
+            <span style="color: #228b22;">String</span> <span style="color: #a0522d;">userInput</span>;
+            <span style="color: #a020f0;">while</span> <span style="color: #709870;">(</span><span style="color: #907373;">(</span>userInput = stdIn.readLine<span style="color: #6276ba;">()</span><span style="color: #907373;">)</span> != <span style="color: #008b8b;">null</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                <span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span><span style="color: #8b2252;">"SAIR"</span>.equals<span style="color: #6276ba;">(</span>userInput<span style="color: #6276ba;">)</span><span style="color: #907373;">)</span> <span style="color: #a020f0;">break</span>;
+                <span style="color: #228b22;">byte</span><span style="color: #907373;">[]</span> <span style="color: #a0522d;">buffer</span> = <span style="color: #907373;">(</span>nick + <span style="color: #8b2252;">"&gt; "</span> + userInput<span style="color: #907373;">)</span>.getBytes<span style="color: #907373;">()</span>;
+                <span style="color: #228b22;">DatagramPacket</span> <span style="color: #a0522d;">datagrama</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DatagramPacket</span> <span style="color: #907373;">(</span>
+                    buffer, buffer.length, addr, porta<span style="color: #907373;">)</span>;
+                socket.send <span style="color: #907373;">(</span>datagrama<span style="color: #907373;">)</span>;
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">UnknownHostException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Endere&#231;o desconhecido "</span> + hostName<span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Erro conectanto em: "</span> + hostName<span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org676f1d8" class="outline-3">
+<h3 id="org676f1d8">Servidor</h3>
+<div class="outline-text-3" id="text-org676f1d8">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">net</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">io</span>.*;
+<span style="color: #a020f0;">import</span> <span style="color: #008b8b;">java</span>.<span style="color: #008b8b;">util</span>.*;
+
+<span style="color: #a020f0;">public</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Aula01_Ex03_Servidor</span> <span style="color: #707183;">{</span>
+
+    <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Set</span><span style="color: #7388d6;">&lt;</span><span style="color: #228b22;">Cliente</span><span style="color: #7388d6;">&gt;</span> <span style="color: #a0522d;">clientes</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">HashSet</span><span style="color: #7388d6;">&lt;&gt;()</span>;
+
+    <span style="color: #a020f0;">static</span> <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Cliente</span> <span style="color: #7388d6;">{</span>
+        <span style="color: #228b22;">InetAddress</span> <span style="color: #a0522d;">endereco</span>;
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">porta</span>;
+
+        <span style="color: #a020f0;">public</span> <span style="color: #0000ff;">Cliente</span> <span style="color: #909183;">(</span><span style="color: #228b22;">DatagramPacket</span> <span style="color: #a0522d;">pkt</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            endereco = pkt.getAddress<span style="color: #709870;">()</span>;
+            porta = pkt.getPort<span style="color: #709870;">()</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">static</span> <span style="color: #228b22;">Cliente</span> <span style="color: #0000ff;">atualizaClientes</span> <span style="color: #909183;">(</span><span style="color: #228b22;">DatagramPacket</span> <span style="color: #a0522d;">pkt</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            <span style="color: #228b22;">Cliente</span> <span style="color: #a0522d;">ret</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">Cliente</span><span style="color: #709870;">(</span>pkt<span style="color: #709870;">)</span>;
+            clientes.add<span style="color: #709870;">(</span>ret<span style="color: #709870;">)</span>;
+            <span style="color: #a020f0;">return</span> ret;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">boolean</span> <span style="color: #0000ff;">equals</span><span style="color: #909183;">(</span><span style="color: #228b22;">Object</span> <span style="color: #a0522d;">o</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+             <span style="color: #a020f0;">return</span>
+                 o != <span style="color: #008b8b;">null</span> &amp;&amp;
+                 getClass<span style="color: #709870;">()</span> == o.getClass<span style="color: #709870;">()</span> &amp;&amp;
+                 endereco.equals<span style="color: #709870;">(</span><span style="color: #907373;">(</span><span style="color: #6276ba;">(</span><span style="color: #228b22;">Cliente</span><span style="color: #6276ba;">)</span>o<span style="color: #907373;">)</span>.endereco<span style="color: #709870;">)</span> &amp;&amp;
+                 porta == <span style="color: #709870;">(</span><span style="color: #907373;">(</span><span style="color: #228b22;">Cliente</span><span style="color: #907373;">)</span>o<span style="color: #709870;">)</span>.porta;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">hashCode</span><span style="color: #909183;">()</span> <span style="color: #909183;">{</span>
+            <span style="color: #a020f0;">return</span> Objects.hash<span style="color: #709870;">(</span>endereco, porta<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #a020f0;">public</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">enviaMensagem</span><span style="color: #909183;">(</span><span style="color: #228b22;">byte</span><span style="color: #709870;">[]</span> <span style="color: #a0522d;">buffer</span>, <span style="color: #228b22;">DatagramSocket</span> <span style="color: #a0522d;">socket</span><span style="color: #909183;">)</span> <span style="color: #a020f0;">throws</span> <span style="color: #228b22;">IOException</span> <span style="color: #909183;">{</span>
+            <span style="color: #228b22;">DatagramPacket</span> <span style="color: #a0522d;">datagrama</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DatagramPacket</span> <span style="color: #709870;">(</span>
+                buffer, buffer.length,
+                endereco, porta<span style="color: #709870;">)</span>;
+            socket.send <span style="color: #709870;">(</span>datagrama<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+
+
+    <span style="color: #a020f0;">public</span> <span style="color: #a020f0;">static</span> <span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #7388d6;">(</span><span style="color: #228b22;">String</span><span style="color: #909183;">[]</span> <span style="color: #a0522d;">args</span><span style="color: #7388d6;">)</span> <span style="color: #7388d6;">{</span>
+
+        <span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>args.length != 1<span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.err.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Forma de uso: java Aula01_Ex03_Servidor &lt;porta&gt;"</span><span style="color: #709870;">)</span>;
+            System.exit<span style="color: #709870;">(</span>1<span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">portNumber</span> = Integer.parseInt<span style="color: #909183;">(</span>args<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span><span style="color: #909183;">)</span>;
+
+
+        <span style="color: #a020f0;">try</span><span style="color: #909183;">(</span>
+            <span style="color: #228b22;">DatagramSocket</span> <span style="color: #a0522d;">serverSocket</span> =
+                <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DatagramSocket</span> <span style="color: #709870;">(</span>Integer.parseInt<span style="color: #907373;">(</span>args<span style="color: #6276ba;">[</span>0<span style="color: #6276ba;">]</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>;
+            <span style="color: #909183;">){</span>
+            <span style="color: #a020f0;">while</span> <span style="color: #709870;">(</span><span style="color: #008b8b;">true</span><span style="color: #709870;">)</span> <span style="color: #709870;">{</span>
+                System.out.println<span style="color: #907373;">(</span><span style="color: #8b2252;">"&gt; Esperando mensagens."</span><span style="color: #907373;">)</span>;
+                <span style="color: #228b22;">DatagramPacket</span> <span style="color: #a0522d;">msg</span> = <span style="color: #a020f0;">new</span> <span style="color: #228b22;">DatagramPacket</span> <span style="color: #907373;">(</span><span style="color: #a020f0;">new</span> <span style="color: #228b22;">byte</span><span style="color: #6276ba;">[</span>512<span style="color: #6276ba;">]</span>, 512<span style="color: #907373;">)</span>;
+                serverSocket.receive <span style="color: #907373;">(</span>msg<span style="color: #907373;">)</span>;
+                System.out.println<span style="color: #907373;">(</span><span style="color: #a020f0;">new</span> <span style="color: #228b22;">String</span><span style="color: #6276ba;">(</span>msg.getData<span style="color: #858580;">()</span><span style="color: #6276ba;">)</span><span style="color: #907373;">)</span>;
+                <span style="color: #228b22;">Cliente</span> <span style="color: #a0522d;">cliente</span> = Cliente.atualizaClientes<span style="color: #907373;">(</span>msg<span style="color: #907373;">)</span>;
+                <span style="color: #a020f0;">for</span> <span style="color: #907373;">(</span><span style="color: #228b22;">Cliente</span> <span style="color: #a0522d;">cli</span>: clientes<span style="color: #907373;">)</span> <span style="color: #907373;">{</span>
+                    <span style="color: #a020f0;">if</span> <span style="color: #6276ba;">(</span>cli.equals<span style="color: #858580;">(</span>cliente<span style="color: #858580;">)</span><span style="color: #6276ba;">)</span> <span style="color: #a020f0;">continue</span>;
+                    cli.enviaMensagem<span style="color: #6276ba;">(</span>msg.getData<span style="color: #858580;">()</span>, serverSocket<span style="color: #6276ba;">)</span>;
+                <span style="color: #907373;">}</span>
+            <span style="color: #709870;">}</span>
+        <span style="color: #909183;">}</span> <span style="color: #a020f0;">catch</span> <span style="color: #909183;">(</span><span style="color: #228b22;">IOException</span> <span style="color: #a0522d;">e</span><span style="color: #909183;">)</span> <span style="color: #909183;">{</span>
+            System.out.println<span style="color: #709870;">(</span><span style="color: #8b2252;">"Encerrando conex&#227;o."</span><span style="color: #709870;">)</span>;
+        <span style="color: #909183;">}</span>
+    <span style="color: #7388d6;">}</span>
+
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Emilio Francesquini</p>
+<p class="date">Created: 2018-06-14 Thu 17:28</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>

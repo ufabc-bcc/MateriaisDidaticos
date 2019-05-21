@@ -1,0 +1,99 @@
+#+MACRO: CrLf @@latex:\\@@ @@html:<br>@@ @@ascii:|@@
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+#+STARTUP: inlineimages
+#+LANGUAGE: bt-br
+
+#+LaTeX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[brazil]{babel}
+
+#+TITLE: Universidade Federal do ABC {{{CrLf}}} MCTA025-13 - Sistemas Distribuídos - 2018.Q2
+#+AUTHOR:   Emilio Francesquini {{{CrLf}}} e.francesquini@ufabc.edu.br
+
+#+BEGIN_CENTER
+*Lista de Exercícios 3*[fn::Esta lista inclui exercícios retirados do livro [ST] e da página [[http://www.ic.unicamp.br/~bit/ensino/mc714_2s13/][(link)]]
+criada pelo Prof. Luiz Fernando Bittencourt para o curso de Sistemas
+Distribuídos da Unicamp.]
+#+END_CENTER
+
+1. Por que uma busca por item em uma rede P2P estruturada consome
+   potencialmente menos recursos que em uma rede P2P não estruturada?
+
+2. Explique em detalhes como a construção de redes overlay
+   estruturadas podem tirar vantagem de uma rede overlay não
+   estruturada.
+
+3. O que é uma tabela hash distribuída (distributed hash table – DHT)?
+   De que forma ela é utilizada na construção de sistemas P2P?
+
+4. Cite uma vantagem e uma desvantagem para utilização de hashes sobre
+   o nome e sobre o conteúdo de um item de dado.
+
+5. Explique passo a passo como é feita a busca por um determinado item
+   de dado em uma rede P2P Chord. Utilize um exemplo de rede Chord
+   definido por você, estabelecendo em primeiro lugar qual o intervalo
+   de identificadores dos peers e chaves.
+
+6. Abordagens baseadas em endereço home para localização de objetos
+   possuem a desvantagem que, em princípio, a referência a sua
+   localização original pode nunca mudar. Dê uma solução baseada em
+   DNS para esse problema.
+
+7. Você precisa implementar um aplicação que utiliza objetos remotos
+   móveis. Que solução você utilizaria? Explique-a.
+
+8. Localização de objetos móveis pode ser feita através de ponteiros
+   reparadores (/forwarding pointers/). Quais as desvantagens desse
+   esquema?
+
+9. Em Chord, a finger table para um nó $p$ é definida por $FT_p[i] =
+   succ(p+2^{i-1})$. Suponha um espaço de identificadores de 32 bits e
+   considere a seguinte finger table para o nó 18: $FT_{18} = [20, 20,
+   28, 28, 4]$. Explique para onde o nó 18 encaminha uma requisição
+   para as seguintes chaves: l = 26, 20, 18, 17, 29.
+
+10. Se inserirmos um nó em um sistema Chord, precisamos atualizar
+    todas as finger tables imediatamente?
+
+11. Explique como a resolução de nomes acontece no Chord para k = 30
+    iniciando no nó 21 do exemplo a seguir. Faça o mesmo para k = 19
+    partindo do nó 21. [[./chord.png]]
+
+12. Explique os valores para a finger table do nó 9.
+
+13. Qual a diferença entre um ponteiro simbólico e um ponteiro estrito
+    em um sistema de nomeação?
+
+14. Qual é uma das principais desvantagens quando fazemos uma busca
+    recursiva por uma chave em um sistema baseado em DHT?
+
+15. O que é um mecanismo de fechamento (/closure/) no contexto da
+    resolução de nomes?
+
+16. Dê um exemplo de como um mecanismo de closure para uma URL pode
+    funcionar.
+
+17. Considere um sistema de arquivos distribuídos que utilize um
+    espaço de nomes diferente para cada um dos seus usuários. Em tal
+    sistema seria possível compartilhar arquivos entre usuários
+    distintos?
+
+18. Explique a diferença entre resolução de nomes iterativa e
+    recursiva em um serviço de nomes distribuído como o DNS.
+
+19. Alguns nomes de DNS podem ser resolvidos para diversos endereços
+    IP. Qual o propósito de tal abordagem?
+
+20. Resolução de nomes iterativa e recursiva possuem diferentes
+    propriedades de escalabilidade. Explique quais as diferenças mais
+    importantes.
+
+21. Um serviço de diretório é muito similar a um serviço de páginas
+    amarelas: entidades são consultadas pela especificação de
+    propriedades ao invés de seus nomes exatos (como no DNS). Por que
+    uma busca em um serviço de diretório é muitas vezes mais eficiente
+    se feita em uma máquina ao invés de em um serviço distribuído?
+
+22. Descreva as características das camadas global, administrativa e
+    gerencial em uma implementação de espaço de nomes.
