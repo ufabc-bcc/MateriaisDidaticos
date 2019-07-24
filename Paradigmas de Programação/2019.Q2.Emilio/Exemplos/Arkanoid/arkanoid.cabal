@@ -1,0 +1,21 @@
+name:                arkanoid
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/githubuser/arkanoid#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2018 Author name here
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+executable arkanoid
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  other-modules:       Ball, Blocks, Collision, Game, Window, Player
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5, gloss
