@@ -111,8 +111,8 @@ printFlush s =  do
     hFlush stdout
 
 -- Versão ávida de print para Infloats
-printFlushMF :: Infloat -> IO()
-printFlushMF ~(Infloat (d:ds)) = do
+printFlushMF :: [Integer] -> IO()
+printFlushMF ~(d:ds) = do
     printFlush d
     putStr "."
     mapM_ printFlush ds
@@ -132,7 +132,7 @@ instance Show Infloat where
   show x =
     show d ++ "." ++ map (intToDigit . fromInteger) (take 100 ds) ++ "..."
     where
-      Infloat (d:ds) = converteBase x 10
+      (10, Infloat (d:ds)) = converteBase x 10
 
 instance Num Infloat where
 
@@ -179,7 +179,6 @@ instance Num Infloat where
 
 instance Fractional Infloat where
   fromRational r =
-    let  in
       Infloat $ fcn (numerator r) (denominator r)
     where
       fcn n d =
@@ -212,7 +211,7 @@ m *> ~(Infloat (v0:v1:vs)) =
       | p > base1 = c + 1 : cm (p - base) b us
       | otherwise =
         let w@(w0:wq) = cm p b us in
-          if w0 > base then c : w
+          if w0 < base then c : w
           else (c + 1) : 0 : wq
       where
         (a, b) = quotRem (m * u0) base
@@ -238,17 +237,17 @@ pi16 =
       | u1 + v0 < base1 = u0 : ssum' ((u1:uq) <+> v : r)
       | otherwise = u <+> (0:ssum' (v:r)) -- propaga o vai 1 para a esquerda
 
-converteBase :: Infloat -> Integer -> Infloat
+converteBase :: Infloat -> Integer -> (Integer, Infloat)
 converteBase (Infloat v) nBase =
-  Infloat $ converteBase' v
+  (nBase, Infloat $ converteBase' v)
   where
     -- (i) pega o primeiro dígito, (ii) multiplica por base para
     -- deslocar o próximo dígito para antes da vírgula, (iii) repete
     converteBase' ~(v0:vs) =
       v0 : converteBase' (nBase *> Infloat (0:vs))
 
-pi10 :: Infloat
-pi10 = converteBase pi16 10
+pi10 :: [Integer]
+pi10 = (^) . snd $ converteBase pi16 10
 
 -- Primeiro uso de uma Monad IO fora da main. \o/
 time :: IO t -> IO t
@@ -301,7 +300,7 @@ main = do
     putStrLn "---"
 
     putStrLn "Pi 1k dígitos.."
-    time $ ((^) pi10 !! 1000)  `seq` return ()
+    time $ (pi10 !! 1000)  `seq` return ()
 
     putStrLn "---"
 
