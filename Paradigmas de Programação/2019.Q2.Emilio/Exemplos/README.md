@@ -5,3 +5,5 @@
   - http://hackage.haskell.org/package/gloss
 - **Laziness** - Avaliação preguiçosa ([Lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)) 
   - Exemplos de avaliação preguiçosa em Haskell
+- **State Transformer**
+  - 3 exemplos simples de como utilizar estados com uma Monad
