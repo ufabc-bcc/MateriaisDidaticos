@@ -7,6 +7,7 @@
 
 ## Paradigmas de Programação
   - 2019.Q2 - Emilio Francesquini
+    - http://professor.ufabc.edu.br/~e.francesquini/2019.q2.paradigmas/
   - 2018.Q2 - Fabrício Olivetti
     - https://folivetti.github.io/teaching/2018-autumn-teaching-1
 
