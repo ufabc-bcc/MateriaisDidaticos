@@ -74,7 +74,7 @@ simpleRandomInit seed =
   (z, w)
   where
     n1 = (seed * 48947) `mod` 4294967296;
-    z = if n1 /= 9 then n1 else 362436069
+    z = if n1 /= 0 then n1 else 362436069
     n2 = (seed * 104623) `mod` 4294967296;
     w = if n2 /= 0 then n2 else 521288629
 
