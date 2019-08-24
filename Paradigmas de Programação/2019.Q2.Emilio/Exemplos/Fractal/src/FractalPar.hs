@@ -90,12 +90,10 @@ serializa :: Int -> [[RGB]] -> Put
 serializa sz pxs = do
   putByteString header
   mapM_ putByteString bytess
-  -- putByteString bytes
   where
     header = pack $ printf "P6\n%d %d\n255\n" sz sz
     rgbToList (RGB r g b) = [r, g, b]
     bytess = map (SB.pack . concatMap rgbToList) pxs
-    -- bytes = SB.pack $ map (concatMap rgbToList) pxs
 
 fractal :: (Int -> Int -> RGB) -> Int -> Int -> Int -> [RGB]
 fractal px sz f t  =
