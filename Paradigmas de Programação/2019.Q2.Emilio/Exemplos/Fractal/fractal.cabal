@@ -14,7 +14,7 @@ cabal-version:       >=1.10
 extra-source-files:  README.md
 
 executable fractals
-  ghc-options:         -Wall -O3 -fllvm -main-is FractalSeq
+  ghc-options:         -Wall -O3 -main-is FractalSeq
   hs-source-dirs:      src
   main-is:             FractalSeq.hs
   default-language:    Haskell2010
@@ -24,8 +24,7 @@ executable fractals
                        vector
 
 executable fractalp
-  ghc-options:         -Wall -O3 -fllvm -main-is FractalPar
-                       -- -threaded -rtsopts -with-rtsopts=-N -eventlog
+  ghc-options:         -Wall -O3 -threaded -rtsopts -with-rtsopts=-N -eventlog -main-is FractalPar
   hs-source-dirs:      src
   main-is:             FractalPar.hs
   default-language:    Haskell2010
@@ -33,7 +32,5 @@ executable fractalp
                        binary,
                        bytestring,
                        vector,
-                       parallel,
-                       split,
-                       utf8-string,
+                       monad-par,
                        deepseq

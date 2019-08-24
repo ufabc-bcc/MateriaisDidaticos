@@ -8,15 +8,22 @@
 {-# LANGUAGE BangPatterns #-}
 module FractalPar where
 
+import Control.DeepSeq
+import Control.Monad
+import Control.Monad.Par
+
+
 import Data.Complex
+import Data.Word
 import Data.Vector (generate, Vector, (!))
 
 import qualified Data.ByteString as SB
 import qualified Data.ByteString.Lazy as SBZ (writeFile)
 import Data.Binary.Put
 import Data.ByteString.Char8 (pack)
-import Data.Word
+
 import Text.Printf
+import System.Environment
 
 -- Parâmetros de execução
 
@@ -38,6 +45,9 @@ nomeArquivo :: FilePath
 nomeArquivo = "mandel.ppm"
 
 data RGB = RGB Word8 Word8 Word8
+
+instance NFData RGB where
+  rnf (RGB r g b) = r `seq` g `seq` b `seq` ()
 
 magnitudeSq :: Complex Double -> Double
 magnitudeSq (r :+ i) = r * r + i * i
@@ -76,26 +86,42 @@ paleta =
 
 -- Dada a lista de pixels converte em bytes para a ecrita em formato
 -- PPM binário
-serializa :: Int -> [RGB] -> Put
+serializa :: Int -> [[RGB]] -> Put
 serializa sz pxs = do
   putByteString header
-  putByteString bytes
+  mapM_ putByteString bytess
+  -- putByteString bytes
   where
     header = pack $ printf "P6\n%d %d\n255\n" sz sz
     rgbToList (RGB r g b) = [r, g, b]
-    bytes = SB.pack $ concatMap rgbToList pxs
+    bytess = map (SB.pack . concatMap rgbToList) pxs
+    -- bytes = SB.pack $ map (concatMap rgbToList) pxs
 
-fractal :: Int -> [RGB]
-fractal sz =
-  [px x y | y <- [0..sz-1], x <- [0..sz-1]]
+fractal :: (Int -> Int -> RGB) -> Int -> Int -> Int -> [RGB]
+fractal px sz f t  =
+  [px x y | y <- [f..t], x <- [0..sz-1]]
+
+fractalPar :: Int -> Int -> [[RGB]]
+fractalPar !sz nchunks =
+  runPar $ do
+     is <- replicateM nchunks new
+     mapM_ (\(i, c) -> fork $ put i (fracfun c)) (zip is cs)
+     mapM get is
   where
+    step = sz `div` nchunks
+    chunks l = (l + 1, l + step) : chunks (l + step)
+    cs = take nchunks $ chunks (-1)
     sz2 = fromIntegral sz / 2
     -- Fator de conversão imagem plano complexo
     fator = maxComplex * 2 / fromIntegral sz
     px x y = paleta ! mandelPixel sz2 fator x y
+    fracfun = uncurry $ fractal px sz
+
 
 main :: IO ()
 main = do
-  let sz = 1024
-  SBZ.writeFile nomeArquivo $ runPut (serializa sz $ fractal sz)
+  [ssz,snchunks] <- getArgs
+  let sz = read ssz :: Int
+  let nchunks = read snchunks :: Int
+  SBZ.writeFile nomeArquivo $ runPut (serializa sz $ fractalPar sz nchunks)
   putStrLn "Feito!"

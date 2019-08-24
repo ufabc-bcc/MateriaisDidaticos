@@ -18,6 +18,8 @@ import Data.ByteString.Char8 (pack)
 import Data.Word
 import Text.Printf
 
+import System.Environment
+
 -- Parâmetros de execução
 
 -- Limites do plano complexo
@@ -96,6 +98,7 @@ fractal sz =
 
 main :: IO ()
 main = do
-  let sz = 1024
+  [ssz] <- getArgs
+  let sz = read ssz :: Int
   SBZ.writeFile nomeArquivo $ runPut (serializa sz $ fractal sz)
   putStrLn "Feito!"
