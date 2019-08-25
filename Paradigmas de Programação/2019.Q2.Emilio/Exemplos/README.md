@@ -7,3 +7,7 @@
   - Exemplos de avaliação preguiçosa em Haskell
 - **State Transformer**
   - 3 exemplos simples de como utilizar estados com uma Monad
+- **Fractal**
+  - Um exemplo simples de como um programa sequencial pode ser paralelizado.
+- **Machine Learning**
+  - Aprendizado de máquina funcional: exemplo desde o processamento dos dados até a análise dos dados em Haskell.
