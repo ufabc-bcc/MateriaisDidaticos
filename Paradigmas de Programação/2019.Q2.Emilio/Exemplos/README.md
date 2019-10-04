@@ -11,3 +11,5 @@
   - Um exemplo simples de como um programa sequencial pode ser paralelizado.
 - **Machine Learning**
   - Aprendizado de máquina funcional: exemplo desde o processamento dos dados até a análise dos dados em Haskell.
+- **Análise simples e Plotagem de dados**
+  - Análise simples como médias, desvio padrão, ... e plotagem dos dados usando a biblioteca [Vega](https://vega.github.io/vega/)
