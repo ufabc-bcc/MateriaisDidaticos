@@ -1,0 +1,14 @@
+-- Emilio Francesquini <e.francesquini@ufabc.edu.br>
+-- CC-BY-SA
+-- 10/2019
+
+Os arquivos dados_diarios_rj_inmet.txt e dados_diarios_sp_inmet.txt
+foram gerados pelo Instituto Nacional de Meteorologia ao qual também
+pertencem todos os direitos. Foram obtidos do BDMEP (Banco de Dados
+Meteorológicos para Ensino e Pesquisa).
+http://www.inmet.gov.br/portal/index.php?r=bdmep/bdmep
+
+Os demais arquivos foram criados para o curso de programação funcional
+na Universidade Federal do ABC. Você pode usá-los para qualquer fim
+não comercial contanto que mantenha os créditos aos autores conforme a
+licença CC-BY-SA.
