@@ -1,0 +1,9 @@
+[submodule "Programação Funcional/Estruturas de dados puramente funcionais/Finger Trees"]
+	path = Programação Funcional/Estruturas de dados puramente funcionais/Finger Trees
+	url = git@github.com:ufabc-bcc/2019-Q3-EDS_Funcionais_Dia03.git
+[submodule "Programação Funcional/Estruturas de dados puramente funcionais/Árvores Rubro-Negras e Esquerdistas - Heaps Esquerdistas e Binomiais - Type-safety"]
+	path = Programação Funcional/Estruturas de dados puramente funcionais/Árvores Rubro-Negras e Esquerdistas - Heaps Esquerdistas e Binomiais - Type-safety
+	url = git@github.com:ufabc-bcc/2019-Q3-EDS_Funcionais_Dia02.git
+[submodule "Programação Funcional/Estruturas de dados puramente funcionais/Árvores, Roseiras e Zippers"]
+	path = Programação Funcional/Estruturas de dados puramente funcionais/Árvores, Roseiras e Zippers
+	url = git@github.com:ufabc-bcc/2019-Q3-EDS_Funcionais_Dia01.git
