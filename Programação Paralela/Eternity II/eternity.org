@@ -1,0 +1,128 @@
+#+INCLUDE: utils.org
+#+INCLUDE: simple_template.org
+
+#+TITLE:    Eternity II
+#+SUBTITLE: UFABC - MCZA020-13 - Programação Paralela
+#+AUTHOR:   Emilio Francesquini
+#+EMAIL:    e.francesquini@ufabc.edu.br
+#+LANGUAGE: pt_BR
+#+OPTIONS: num:t
+#+OPTIONS: ^:nil
+
+-----
+
+* O Jogo[fn::[[https://en.wikipedia.org/wiki/The_Game_(mind_game)][Perdi]]]
+
+    Eternity II é um quebra-cabeça [fn::A descrição foi adaptada da [[https://en.wikipedia.org/wiki/Eternity_II_puzzle][Wikipedia]]]
+    que foi lançado em 2007. Naquela época havia um prêmio de US$ 2
+    milhões para a primeira pessoa que apresentasse uma solução
+    completa. Contudo, até hoje nenhuma solução completa foi
+    encontrara e o prêmio continua em aberto.
+
+    Eternity II é um quebra-cabeça clássico de casamento de bordas que
+    envolve a colocação de $256$ peças em um tabuleiro de
+    $16x16$. Cada peça tem as suas bordas com diferentes combinações
+    de formas e cores (que neste texto simplificamos para apenas
+    cores). As peças devem ser colocadas no tabuleiro de maneira que
+    todas as cores de suas bordas sejam uma correspondência às bordas
+    das peças adjacentes. As bordas do tabuleiro são um caso com
+    tratamento especial que apenas podem receber peças com bordas
+    cinzas. Cada uma das peças pode ser rotacionada e tem, portanto,
+    $4$ possíveis colocações para cada posição do tabuleiro. Há $22$
+    cores no total, sem incluir as bordas cinzas. No jogo original a
+    peça do centro do tabuleiro é pré-determinada e algumas dicas
+    sobre o posicionamento de algumas peças são dadas.
+
+    #+CAPTION: Na esquerda um conjunto de peças para um quebra-cabeça $4 x 4$. Na direita o quebra cabeça resolvido. Note como nesta solução algumas das peças foram rotacionadas.
+    [[./eternity.png]]
+
+
+    Este jogo foi criado especificamente para ser dificílimo de
+    resolver por força bruta. De fato, ele permanece até hoje
+    intratável em sua forma original. O número total de configurações
+    possíveis (assumindo que todas as peças são distintas e ignorando
+    as peças com posicionamento pré-determinado e as dicas de
+    posicionamento) é de $256! \times 4^{256}$ ou, aproximadamente, $1.15 \times 10^{661}$.
+    Um limite superior mais justo pode ser obtido levando em
+    consideração essas restrições e dicas o que acaba nos levando a um
+    espaço de busca de $3.11 \times 10^{545}$.
+
+    O código abaixo só funciona para pequenas instâncias do
+    problema. A versão paralela também é útil *apenas* para fins de
+    instrução. O seu desempenho poderia ser melhorado por uma divisão
+    mais inteligente do trabalho.
+
+    Nestas implementações não se leva em consideração as peças com
+    posições iniciais pré-determinadas nem as dicas de colocação. O
+    tamanho do tabuleiro, o número de cores e peças são recebidos pela
+    entrada padrão e a solução é impressa na saída padrão.
+
+    Tanto a versão sequencial quanto a versão paralela usam a mesma
+    abordagem de força bruta baseada em [[https://pt.wikipedia.org/wiki/Backtracking][backtracking]]. É um bom
+    exercício pensar em estratégias alternativas e heurísticas para
+    melhorar os códigos abaixo. Note, contudo, que um único
+    quebra-cabeças pode ter mais de uma solução correta.
+
+* Entrada
+
+  Cada entrada contém um quebra-cabeça. Ela consiste de uma lista de
+  inteiros separada por espaços e quebras de linha. A primeira linha
+  contém $2$ inteiros: o tamanho do tabuleiro $g$ e o número de cores
+  $c$. As $g^2$ linhas seguintes contém cada uma das peças. A ordem
+  de apresentação das peças é importante pois será utilizada na
+  saída (contagem a partir do 0, logo as peças são numeradas de $0$ to
+  $g^2 - 1$. Cada peça é descrita por $4$ inteiros entre $0$ e $c - 1$
+  descrevendo as cores de suas bordas no sentido horário iniciando
+  pela borda superior. A cor $0$ (cinza) é considerada como especial:
+  as únicas posições válidas no tabuleiro para essas bordas são nos
+  limites do tabuleiro. Como exemplo, a entrada abaixo representa a
+  figura acima. É razoável assumir que $c \le g$.
+
+  A entrada é recebida pela entrada padrão.
+
+* Saída
+
+  A saída esperada deve possuir $g^2$ linhas, cada uma representando
+  cada uma das casas do tabuleiro. A ordem das linhas segue o
+  tabuleiro, da esquerda para a direita, de cima para baixo. Cada
+  linha é composta por $2$ inteiros. O primeiro indica o número da
+  peça e o segundo indica o número de rotações em sentido horário. A
+  saída esperada (representada na figura (b) para a entrada descrita
+  acima pode ser vista abaixo.
+
+* Exemplo
+
+   | *Input* | *Output* |
+   |---------+---------|
+   | 4 5     | 0 0     |
+   | 0 1 2 0 | 9 1     |
+   | 0 0 2 1 | 11 1    |
+   | 1 0 0 1 | 3 3     |
+   | 2 0 0 2 | 8 0     |
+   | 3 4 3 3 | 5 2     |
+   | 4 4 4 3 | 4 3     |
+   | 4 4 3 3 | 12 2    |
+   | 4 4 3 3 | 14 0    |
+   | 2 4 2 0 | 6 0     |
+   | 1 4 1 0 | 7 2     |
+   | 1 4 2 0 | 15 2    |
+   | 2 4 1 0 | 2 1     |
+   | 2 3 2 0 | 13 3    |
+   | 1 3 1 0 | 10 3    |
+   | 2 3 1 0 | 1 1     |
+   | 1 3 2 0 |         |
+
+Para verificar a saída utilize o programa [[./checker.c][checker.c]]
+Esta e outras entradas de exemplo: [[./entradas.zip][entradas.zip]]
+
+* Código sequencial
+
+  Você pode baixar o código aqui: [[./eternity.c][eternity.c]].
+
+  #+INCLUDE: "./eternity.c" src c
+
+* Código paralelo
+
+  Você pode baixar o código aqui: [[./eternity_par.c][eternity_par.c]].
+
+  #+INCLUDE: "./eternity_par.c" src c
