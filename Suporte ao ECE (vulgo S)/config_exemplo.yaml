@@ -1,0 +1,5 @@
+nome: BotDivertido
+client_id: substituir por id obtido no Twitch.tv
+token: substituir por token obtido no Twitch.tv
+canal: canal do twitch que o bot deve entrar
+
