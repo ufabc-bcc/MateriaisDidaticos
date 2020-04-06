@@ -81,7 +81,11 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
 
         elif comando == "upvote":
             print(pergunta)
-            idx_pergunta = int(pergunta[1:])
+            try:
+                idx_pergunta = int(pergunta[1:])
+            except ValueError:
+                return
+
             if idx_pergunta >= 0 and idx_pergunta < len(self.perguntas):
                 if not self.lidas[idx_pergunta] and not nick in self.upvotes[idx_pergunta]:
                     self.upvotes[idx_pergunta].append(nick)
@@ -126,7 +130,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             self.lidas = []
             self.proxima = None
             self.upvotes = []
-            conexao.privmsg(self.channel, "Reiniciando perguntas e contagens, pedido por {nick}")
+            conexao.privmsg(self.channel, f"Reiniciando perguntas e contagens, pedido por {nick}")
 
         else:
             conexao.privmsg(self.channel, f"Comando {comando} não reconhecido ou não permitido")
