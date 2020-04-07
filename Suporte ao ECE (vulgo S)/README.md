@@ -3,6 +3,7 @@
 1. classbot_exemplo.py: Bot para organizar as perguntas no chat do Twitch:
    * Instruções de uso:
       - Instale a biblioteca IRC com `pip install irc`
+      - Instale a biblioteca PyYAML com `pip install pyyaml`
       - Crie uma conta em https://www.twitch.tv/ para fazer Stream
       - Crie uma conta em https://www.twitch.tv/ para o bot
       - Registre um aplicativo em https://dev.twitch.tv/console/apps e obtenha um ID de cliente (pode deixar a url como localhost)
