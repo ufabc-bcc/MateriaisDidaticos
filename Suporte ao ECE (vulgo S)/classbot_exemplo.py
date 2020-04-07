@@ -1,6 +1,7 @@
 '''
 ClassBot - Bot para aulas.
-Author: Fabricio Olivetti de França
+Authors: Fabricio Olivetti de França
+         Thiago Covões
 '''
 
 import irc.bot
