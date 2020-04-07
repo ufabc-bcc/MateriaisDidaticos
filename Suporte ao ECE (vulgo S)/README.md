@@ -9,4 +9,4 @@
       - Com o usuário do bot, entre em https://twitchapps.com/tmi/ e obtenha uma senha OAUTH (token)
       - Alterar o arquivo config_exemplo.yaml com o nome do bot, o id de cliente, o OAUTH e o nome do seu usário de stream
       - Acrescente o campo admins no arquivo yaml com os nomes de usuários que podem recuperar perguntas para serem respondidas
-      - Os comandos são "!pergunta texto da pergunta" para fazer uma pergunta, "!lista" para listar as perguntas, "!upvote QN" para votar na pergunta N, "!proxima" para recuperar a próxima pergunta mais votada (apenas admin) e "!limpar" para apagar todas as perguntas (apenas admin).
+      - Os comandos são `!pergunta texto da pergunta` para fazer uma pergunta, `!lista` para listar as perguntas, `!upvote QN` para votar na pergunta N, `!proxima` para recuperar a próxima pergunta mais votada (apenas admin) e `!limpar` para apagar todas as perguntas (apenas admin).
